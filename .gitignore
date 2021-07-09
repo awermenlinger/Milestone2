@@ -130,3 +130,6 @@ dmypy.json
 
 #pptx files
 *.pptx
+
+# file: ~/.gitignore_global
+.idea
