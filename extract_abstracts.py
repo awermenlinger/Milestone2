@@ -5,7 +5,9 @@ import pandas as pd
 import numpy as np
 
 Entrez.email = "awerm@umich.edu"
-Entrez.api_key = "ee71d15e8a446320e3aaacd01c88966efe08"
+
+API = input ("Enter api key :")
+Entrez.api_key = API
 
 
 
