@@ -1,5 +1,14 @@
+Potential source of ontologies?
 https://academic.oup.com/database/article/doi/10.1093/database/baw145/2595391
 
+documentation on Bio.Entrez
 https://biopython.org/docs/1.75/api/Bio.Entrez.html
 
+information on the codes in the medline extract
 https://www.nlm.nih.gov/bsd/mms/medlineelements.html#mh
+
+Summarizing Topic Models with Transformers:
+https://www.kaggle.com/donkeys/summarizing-topic-models-with-transformers
+
+Topic Modeling over time:
+https://towardsdatascience.com/thats-mental-using-lda-topic-modeling-to-investigate-the-discourse-on-mental-health-over-time-11da252259c3
