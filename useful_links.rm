@@ -12,3 +12,6 @@ https://www.kaggle.com/donkeys/summarizing-topic-models-with-transformers
 
 Topic Modeling over time:
 https://towardsdatascience.com/thats-mental-using-lda-topic-modeling-to-investigate-the-discourse-on-mental-health-over-time-11da252259c3
+
+HuggingFace models:
+https://huggingface.co/models?pipeline_tag=text-classification&search=bio
