@@ -1,11 +1,12 @@
 from Bio import Entrez
+from mike_experiments.config import *
 import pandas as pd
 import numpy as np
 
 # Goal of this python script is to fetch the pubids from pubmed and save them to a txt file
 
-my_email = 'awerm@umich.edu'
-API = "ee71d15e8a446320e3aaacd01c88966efe08"
+my_email = antoine_email
+API = antoine_api_key
 
 
 def search(query):
