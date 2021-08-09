@@ -7,15 +7,13 @@ def get_pubmed_ids_from_csv(ids_csv_filepath):
     """
     Function retrieves PubMed ids from a csv file
 
-    :param ids_csv_filepath: String - File path to CSV file containing PubMed IDs
+    :param ids_csv_filepath: String - Full file path including file name to CSV file containing PubMed IDs
     :return lines: List of PubMed article IDs
     """
     with open(ids_csv_filepath, 'r') as file:
         lines = file.read().split('\n')
 
     return lines
-
-# 'C:/Users/melan/Google Drive/Mike\'s Documents/Projects/Milestone2/pubmed_ids_from_search.txt'
 
 
 def extract_pubmed_articles(pubmed_ids):
@@ -34,7 +32,13 @@ def extract_pubmed_articles(pubmed_ids):
 
 
 def articles_to_csv(articles, save_filepath, filename):
-    # pubmed_articles.csv
+    """
+    Creates a CSV file from PubMed article dictionaries containing article information and metadata
+    :param articles: Dictionary containing PubMed article data
+    :param save_filepath: File path where CSV should be saved.  Example: Milestone2/assets
+    :param filename: Name to be given to CSV file.  Example: pubmed_articles.csv
+    :return: CSV file containing fetched PubMed articles saved to file path specified
+    """
     csv_file = open(f'{save_filepath}/{filename}', 'w')
     dict_writer = csv.DictWriter(csv_file, articles[0].keys())
     dict_writer.writeheader()
