@@ -3,14 +3,14 @@ import time
 import csv
 
 
-def get_pubmed_ids_from_csv(ids_csv_filepath):
+def get_pubmed_ids_from_csv(ids_txt_filepath):
     """
     Function retrieves PubMed ids from a csv file
 
-    :param ids_csv_filepath: String - Full file path including file name to CSV file containing PubMed IDs
+    :param ids_txt_filepath: String - Full file path including file name to txt file containing PubMed IDs
     :return lines: List of PubMed article IDs
     """
-    with open(ids_csv_filepath, 'r') as file:
+    with open(ids_txt_filepath, 'r') as file:
         lines = file.read().split('\n')
 
     return lines
@@ -28,7 +28,8 @@ def extract_pubmed_articles(pubmed_ids):
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
         articles.append(Medline.parse(handle))
         time.sleep(0.35)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
-        return articles
+
+    return articles
 
 
 def articles_to_csv(articles, save_filepath, filename):
@@ -44,3 +45,9 @@ def articles_to_csv(articles, save_filepath, filename):
     dict_writer.writeheader()
     dict_writer.writerows(articles)
     csv_file.close()
+
+
+if __name__ == '__main__':
+    pubmed_ids = get_pubmed_ids_from_csv(ids_txt_filepath='pubmed_ids_from_search.txt')
+    articles = extract_pubmed_articles(pubmed_ids=pubmed_ids)
+    articles_to_csv(articles=articles, save_filepath='Milestone2', filename='pubmed_articles.csv')
