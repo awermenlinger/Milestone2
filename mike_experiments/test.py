@@ -9,7 +9,7 @@
 # print(df)
 
 from Bio import Entrez, Medline
-from mike_experiments.config import *
+from configurations.config import *
 
 Entrez.email = mike_email
 Entrez.api_key = mike_api_key

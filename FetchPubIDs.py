@@ -1,7 +1,5 @@
 from Bio import Entrez
-from mike_experiments.config import *
-import pandas as pd
-import numpy as np
+from configurations.config import *
 
 # Goal of this python script is to fetch the pubids from pubmed and save them to a txt file
 

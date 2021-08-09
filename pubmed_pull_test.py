@@ -1,5 +1,5 @@
 from Bio import Entrez
-from mike_experiments.config import *
+from configurations.config import *
 # A brief example of how to pull an article abstract based on a key word search.
 # Used "fever" as a key word search which returns the article IDs.
 # Then used the first article ID to pull out the article title and abstract text as an example.

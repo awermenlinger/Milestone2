@@ -134,4 +134,6 @@ dmypy.json
 # file: ~/.gitignore_global
 .idea
 
-mike_experiments/config.py
+configurations/config.py
+
+configurations
