@@ -136,4 +136,4 @@ dmypy.json
 
 configurations/config.py
 
-configurations*
+configurations/
