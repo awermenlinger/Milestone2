@@ -50,4 +50,4 @@ def articles_to_csv(articles, save_filepath, filename):
 if __name__ == '__main__':
     pubmed_ids = get_pubmed_ids_from_csv(ids_txt_filepath='pubmed_ids_from_search.txt')
     articles = extract_pubmed_articles(pubmed_ids=pubmed_ids)
-    articles_to_csv(articles=articles, save_filepath='Milestone2', filename='pubmed_articles.csv')
+    articles_to_csv(articles=articles, save_filepath='Milestone2/data', filename='pubmed_articles.csv')
