@@ -1,7 +1,10 @@
 from Bio import Entrez, Medline
 import time
 import csv
+from configurations.config import *
 
+my_email = mike_email
+api = mike_api_key
 
 def get_pubmed_ids_from_csv(ids_txt_filepath):
     """
@@ -24,9 +27,12 @@ def extract_pubmed_articles(pubmed_ids):
     :return articles: Dictionary containing full PubMed articles and associated metadata
     """
     articles = []
-    for pubmed_id in pubmed_ids:
+    Entrez.email = my_email
+    Entrez.api_key = mike_api_key
+
+    for pubmed_id in pubmed_ids[:6]:
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
-        articles.append(Medline.parse(handle))
+        articles.append(*Medline.parse(handle))
         time.sleep(0.35)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
 
     return articles
@@ -48,6 +54,6 @@ def articles_to_csv(articles, save_filepath, filename):
 
 
 if __name__ == '__main__':
-    pubmed_ids = get_pubmed_ids_from_csv(ids_txt_filepath='pubmed_ids_from_search.txt')
+    pubmed_ids = get_pubmed_ids_from_csv(ids_txt_filepath='../pubmed_ids_from_search.txt')
     articles = extract_pubmed_articles(pubmed_ids=pubmed_ids)
-    articles_to_csv(articles=articles, save_filepath='Milestone2/data', filename='pubmed_articles.csv')
+    articles_to_csv(articles=articles, save_filepath='../data', filename='pubmed_articles.csv')
