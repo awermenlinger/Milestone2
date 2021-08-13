@@ -1,6 +1,7 @@
 from Bio import Entrez, Medline
 import time
 import csv
+from tqdm import tqdm
 from configurations.config import *
 
 my_email = mike_email
@@ -30,7 +31,7 @@ def extract_pubmed_articles(pubmed_ids):
     Entrez.email = my_email
     Entrez.api_key = mike_api_key
 
-    for pubmed_id in pubmed_ids:
+    for pubmed_id in tqdm(pubmed_ids):
         article = {}
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
         pulled_article = [*Medline.parse(handle)]
