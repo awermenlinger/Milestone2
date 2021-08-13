@@ -30,9 +30,18 @@ def extract_pubmed_articles(pubmed_ids):
     Entrez.email = my_email
     Entrez.api_key = mike_api_key
 
-    for pubmed_id in pubmed_ids[:6]:
+    for pubmed_id in pubmed_ids:
+        article = {}
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
-        articles.append(*Medline.parse(handle))
+        pulled_article = [*Medline.parse(handle)]
+        article['pubmed_id'] = pubmed_id
+        article['title'] = pulled_article[0].get('TI')
+        article['created_date'] = pulled_article[0].get('CRDT')[0]
+        article['key_words'] = pulled_article[0].get('OT')
+        article['mesh_terms'] = pulled_article[0].get('MH')
+        article['abstract'] = pulled_article[0].get('AB')
+        articles.append(article)
+
         time.sleep(0.35)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
 
     return articles
