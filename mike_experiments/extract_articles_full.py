@@ -1,3 +1,4 @@
+import numpy as np
 from Bio import Entrez, Medline
 import time
 import csv
@@ -37,7 +38,10 @@ def extract_pubmed_articles(pubmed_ids):
         pulled_article = [*Medline.parse(handle)]
         article['pubmed_id'] = pubmed_id
         article['title'] = pulled_article[0].get('TI')
-        article['created_date'] = pulled_article[0].get('CRDT')[0]
+        try:
+            article['created_date'] = pulled_article[0].get('CRDT')[0]
+        except:
+            article['created_date'] = np.nan
         article['key_words'] = pulled_article[0].get('OT')
         article['mesh_terms'] = pulled_article[0].get('MH')
         article['abstract'] = pulled_article[0].get('AB')
