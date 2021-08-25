@@ -33,4 +33,4 @@ for i, row in df_extracted.iterrows():
     df_extracted.at[i,'CreatedDate'] = createddate
 
 
-df_extracted.to_csv("pubmed_ids_extracted_abstracts.csv")
+df_extracted.to_csv("pubmed_ids_extracted_abstracts.csv", index = False)
