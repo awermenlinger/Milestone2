@@ -8,6 +8,7 @@ from configurations.config import *
 my_email = mike_email
 api = mike_api_key
 
+
 def get_pubmed_ids_from_csv(ids_txt_filepath):
     """
     Function retrieves PubMed ids from a csv file
@@ -32,7 +33,7 @@ def extract_pubmed_articles(pubmed_ids):
     Entrez.email = my_email
     Entrez.api_key = mike_api_key
 
-    for pubmed_id in tqdm(pubmed_ids):
+    for pubmed_id in tqdm(pubmed_ids[0]):
         article = {}
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
         pulled_article = [*Medline.parse(handle)]
