@@ -33,7 +33,8 @@ def extract_pubmed_articles(pubmed_ids):
     Entrez.email = my_email
     Entrez.api_key = mike_api_key
 
-    for pubmed_id in tqdm(pubmed_ids[0]):
+    for pubmed_id in tqdm(pubmed_ids):
+        print(pubmed_id)
         article = {}
         handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
         pulled_article = [*Medline.parse(handle)]
@@ -48,9 +49,20 @@ def extract_pubmed_articles(pubmed_ids):
         article['abstract'] = pulled_article[0].get('AB')
         articles.append(article)
 
-        time.sleep(0.35)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
+        append_article_to_csv(article, save_filepath='../data', filename='pubmed_articles_cancer_failsafe.csv')
+        time.sleep(0.4)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
 
     return articles
+
+
+def append_article_to_csv(article, save_filepath, filename):
+    with open(f"{save_filepath}/{filename}", 'a') as csv_file:
+        dict_writer = csv.DictWriter(csv_file,
+                                     fieldnames=['pubmed_id', 'title', 'created_date', 'key_words', 'mesh_terms',
+                                                 'abstract']
+                                     )
+
+        dict_writer.writerow(article)
 
 
 def articles_to_csv(articles, save_filepath, filename):
