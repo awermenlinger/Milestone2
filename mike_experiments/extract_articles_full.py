@@ -33,20 +33,24 @@ def extract_pubmed_articles(pubmed_ids):
     Entrez.email = my_email
     Entrez.api_key = mike_api_key
 
-    for pubmed_id in tqdm(pubmed_ids):
+    for pubmed_id in tqdm(pubmed_ids[4225:]):
         article = {}
-        handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
-        pulled_article = [*Medline.parse(handle)]
-        article['pubmed_id'] = pubmed_id
-        article['title'] = pulled_article[0].get('TI')
         try:
-            article['created_date'] = pulled_article[0].get('CRDT')[0]
+            handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pubmed_id)
+            pulled_article = [*Medline.parse(handle)]
+            article['pubmed_id'] = pubmed_id
+            article['title'] = pulled_article[0].get('TI')
+            try:
+                article['created_date'] = pulled_article[0].get('CRDT')[0]
+            except:
+                article['created_date'] = np.nan
+            article['key_words'] = pulled_article[0].get('OT')
+            article['mesh_terms'] = pulled_article[0].get('MH')
+            article['abstract'] = pulled_article[0].get('AB')
+            articles.append(article)
+
         except:
-            article['created_date'] = np.nan
-        article['key_words'] = pulled_article[0].get('OT')
-        article['mesh_terms'] = pulled_article[0].get('MH')
-        article['abstract'] = pulled_article[0].get('AB')
-        articles.append(article)
+            next
 
         append_article_to_csv(article, save_filepath='../data', filename='pubmed_articles_cancer_failsafe.csv')
         time.sleep(0.4)  # use this to avoid exceeding the PubMed max pull of 3 URL requests per second
