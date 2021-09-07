@@ -9,6 +9,8 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import hamming_loss, accuracy_score
+import win32com.client as win32
+import pickle
 
 
 def concat_article_files():
@@ -62,6 +64,7 @@ def clean_df(df):
 
     return df[['pubmed_id', 'mesh_terms', 'abstract']]
 
+
 df = concat_article_files()
 df = clean_df(df)
 
@@ -70,15 +73,17 @@ mlb = MultiLabelBinarizer()
 # Apply multi-label binarization to key words (like one hot encoding)
 mlb.fit_transform(df['mesh_terms'])
 label_df = pd.DataFrame(mlb.fit_transform(df['mesh_terms']).astype('int8'), columns=mlb.classes_)
-label_df
 label_df = label_df[label_df.columns[label_df.sum()>1]]
-
 label_df['abstract'] = df['abstract'].values
 label_df['created_date'] = df.index
 label_df['pubmed_id'] = df['pubmed_id'].values
+print(label_df)
 
+lst = [df]
+del df
+del lst
 
-y = np.asarray(label_df.values)
+# y = np.asarray(label_df.values)
 X = label_df['abstract']
 
 RANDOM_SEED = 42
@@ -87,7 +92,7 @@ RANDOM_SEED = 42
 vetorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 3))
 
 # splitting the data to training and testing data set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=RANDOM_SEED)
+X_train, X_test, y_train, y_test = train_test_split(X, np.asarray(label_df.values), test_size=0.30, random_state=RANDOM_SEED)
 
 # fitting the tf-idf on the given data
 vetorizer.fit(X_train)
@@ -105,3 +110,14 @@ print(accuracy_score(y_test, predicts))
 print(hamming_loss(y_test, predicts))
 
 
+# save the model to disk
+filename = 'random_forest_model.sav'
+pickle.dump(clf, open(filename, 'wb'))
+
+
+outlook = win32.Dispatch('outlook.application')
+mail = outlook.CreateItem(0)
+mail.To = 'melancholicmaclean@gmail.com; 5174552325@myboostmobile.com'
+mail.Subject = 'Model Complete'
+mail.Body = 'Model finished training.  Check when possible.'
+mail.Send()
