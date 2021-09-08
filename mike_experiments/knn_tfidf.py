@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import classification_report
-from sklearn.metrics import hamming_loss, accuracy_score
+from sklearn.metrics import hamming_loss, accuracy_score, f1_score
 from sklearn.neighbors import KNeighborsClassifier
 
 RANDOM_SEED = 42
@@ -26,7 +26,7 @@ def concat_article_files():
         df = pd.read_csv(f"{file_path}{file}", low_memory=False).dropna(how='all')
         dfs = pd.concat([dfs, df])
 
-    return dfs.sample(frac=0.01, random_state=RANDOM_SEED)
+    return dfs.sample(frac=0.04, random_state=RANDOM_SEED)
 
 
 df = concat_article_files()
@@ -69,13 +69,16 @@ df = clean_df(df)
 mlb = MultiLabelBinarizer()
 
 # Apply multi-label binarization to key words (like one hot encoding)
-mlb.fit_transform(df['mesh_terms'])
+# mlb.fit_transform(df['mesh_terms'])
 label_df = pd.DataFrame(mlb.fit_transform(df['mesh_terms']).astype('int8'), columns=mlb.classes_)
 # label_df = label_df.columns[label_df.sum()>1]
-label_df.drop([col for col, val in label_df.sum().iteritems() if val >= 3], axis=1, inplace=True)
+print(label_df.shape)
+label_df.drop([col for col, val in label_df.sum().iteritems() if val < (label_df.shape[0] * 0.8)], axis=1, inplace=True)
+label_df.dropna(how='all', inplace=True)
 label_df['abstract'] = df['abstract'].values
 label_df['created_date'] = df.index
 label_df['pubmed_id'] = df['pubmed_id'].values
+print(label_df.shape)
 
 lst = [df]
 del df
@@ -97,10 +100,14 @@ vetorizer.fit(X_train)
 X_train_tfidf = vetorizer.transform(X_train)
 X_test_tfidf = vetorizer.transform(X_test)
 
-knn = KNeighborsClassifier(weights='distance', n_jobs=-1)
+
+# weights='distance',
+knn = KNeighborsClassifier(n_neighbors=5, n_jobs=-1)
 multi_target_knn = MultiOutputClassifier(knn, n_jobs=-1)
 clf = multi_target_knn.fit(X_train_tfidf, y_train)
 predicts = clf.predict(X_test_tfidf)
-print(classification_report(y_test, predicts))
-print(accuracy_score(y_test, predicts))
-print(hamming_loss(y_test, predicts))
+# print(classification_report(y_test, predicts))
+print(f"Accuracy: {accuracy_score(y_test, predicts)}")
+print(f"F1 Score (weighted): {f1_score(y_test, predicts, average='weighted')}")
+print(f"F1 Score (micro): {f1_score(y_test, predicts, average='micro')}")
+print(f"Hamming Loss: {hamming_loss(y_test, predicts)}")
