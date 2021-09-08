@@ -9,7 +9,10 @@ import os
 
 #Some code inspired from https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0
 
-
+# SETTINGS FOR MODEL
+RANDOM_SEED = 7245
+passes = 10
+num_topics=20
 
 def preprocess(text):
    result = []
@@ -18,7 +21,6 @@ def preprocess(text):
          result.append(token)
    return result
 
-num_topics=20
 
 #load the files
 df1 = pd.read_csv("data/pubmed_articles_cancer_01.csv",skip_blank_lines=True)
@@ -31,7 +33,7 @@ df4 = pd.read_csv("data/pubmed_articles_cancer_04.csv")
 df4.dropna(inplace=True, axis = 0, how = 'all')
 input_data = pd.DataFrame().append([df1,df2,df3, df4])
 
-#ensure clean abstracts
+#ensure abstracts are strings
 input_data.abstract = input_data.abstract.astype('str')
 
 #preprocess abstracts
@@ -44,14 +46,17 @@ dictionary = corpora.Dictionary(doc_processed)
 doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_processed]
 
 #Lda model
-Lda = gensim.models.ldamodel.LdaModel
+LDA = gensim.models.ldamodel.LdaModel
 
-#Lda model to get the num_topics, number of topic required, 
-#passses is the number training do you want to perform
-ldamodel = Lda(doc_term_matrix, num_topics=num_topics, id2word = dictionary, passes=2)
+#Lda model with settings
+ldamodel = LDA(doc_term_matrix, num_topics=num_topics, id2word = dictionary, passes=passes, random_state=RANDOM_SEED)
+
+#Save the LDA Model
+filename = 'models/trained_lda.sav'
+pickle.dump(ldamodel, open(filename, 'wb'))
+
 
 # Visualize the topics
-#pyLDAvis.enable_notebook() only works in ipython - will save to html
 LDAvis_data_filepath = os.path.join('./results/ldavis_prepared_'+str(num_topics))
 
 LDAvis_prepared = pyLDAvis.gensim_models.prepare(ldamodel, doc_term_matrix, dictionary)
