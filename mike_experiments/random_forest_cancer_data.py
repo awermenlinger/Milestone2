@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
+from sklearn.metrics import hamming_loss, accuracy_score
 
 RANDOM_SEED = 42
 
@@ -26,7 +27,7 @@ def concat_article_files():
         df = pd.read_csv(f"{file_path}{file}", low_memory=False).dropna(how='all')
         dfs = pd.concat([dfs, df])
 
-    return dfs.sample(frac=0.01, random_state=RANDOM_SEED)
+    return dfs.sample(frac=0.05, random_state=RANDOM_SEED)
 
 
 df = concat_article_files()
