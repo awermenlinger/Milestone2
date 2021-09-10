@@ -1,6 +1,6 @@
 from get_dataframe import get_dfs
 from write_results import results_to_txt
-import pandas as pd
+from datetime import datetime
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -8,9 +8,12 @@ from sklearn.svm import SVC
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import hamming_loss, accuracy_score, f1_score, precision_score, classification_report
 
+
+start=datetime.now()
+
 RANDOM_SEED = 42
 
-df, label_df = get_dfs(pct_of_df=0.02, pct_meshterms=0.05)
+df, label_df = get_dfs(pct_of_df=0.01, pct_meshterms=0.05)
 
 print(df.shape)
 print(label_df.shape)
@@ -49,7 +52,8 @@ clf = multiout_svc.fit(X_train_tfidf, y_train)
 predicts = clf.predict(X_test_tfidf)
 # print(classification_report(y_test, predicts))
 
-results_to_txt(clf, y_test, predicts, label_df, 'TFIDF')
+runtime = datetime.now()-start
+results_to_txt(clf, y_test, predicts, label_df, 'TFIDF', runtime)
 
 # estimator = clf.get_params()
 # accuracy = accuracy_score(y_test, predicts)

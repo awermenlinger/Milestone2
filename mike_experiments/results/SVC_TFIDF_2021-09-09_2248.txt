@@ -1,0 +1,46 @@
+{'estimator__C': 1.0, 'estimator__break_ties': False, 'estimator__cache_size': 200, 'estimator__class_weight': None, 'estimator__coef0': 0.0, 'estimator__decision_function_shape': 'ovr', 'estimator__degree': 3, 'estimator__gamma': 'scale', 'estimator__kernel': 'rbf', 'estimator__max_iter': -1, 'estimator__probability': False, 'estimator__random_state': None, 'estimator__shrinking': True, 'estimator__tol': 0.001, 'estimator__verbose': False, 'estimator': SVC(), 'n_jobs': None}
+Run Time: 0:00:53.579731
+Dataframe Size: 41137
+
+Accuracy: 0.03508771929824561
+F1 Score (weighted): 0.5668303670274816
+F1 Score (micro): 0.6981317600786626
+Hamming Loss: 0.1373970640887934
+Precision (average by samples): 0.7463659147869673
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00        61
+           1       0.61      0.99      0.76       244
+           2       0.59      1.00      0.75       237
+           3       0.00      0.00      0.00        83
+           4       0.00      0.00      0.00        36
+           5       0.00      0.00      0.00        43
+           6       0.00      0.00      0.00        33
+           7       0.00      0.00      0.00        23
+           8       0.00      0.00      0.00        30
+           9       0.00      0.00      0.00        38
+          10       0.00      0.00      0.00        25
+          11       0.00      0.00      0.00        26
+          12       0.00      0.00      0.00        35
+          13       0.81      1.00      0.90       322
+          14       0.00      0.00      0.00        53
+          15       1.00      1.00      1.00       398
+          16       0.71      1.00      0.83       278
+          17       0.75      1.00      0.86       298
+          18       0.00      0.00      0.00        45
+          19       0.00      0.00      0.00        41
+          20       0.00      0.00      0.00        77
+          21       0.00      0.00      0.00        23
+          22       0.00      0.00      0.00        21
+          23       0.00      0.00      0.00        30
+          24       0.00      0.00      0.00        31
+          25       0.00      0.00      0.00        27
+          26       0.00      0.00      0.00       112
+          27       0.00      0.00      0.00        35
+
+   micro avg       0.75      0.66      0.70      2705
+   macro avg       0.16      0.21      0.18      2705
+weighted avg       0.51      0.66      0.57      2705
+ samples avg       0.75      0.70      0.69      2705
