@@ -9,11 +9,11 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import hamming_loss, accuracy_score, f1_score, precision_score, classification_report
 
 
-start=datetime.now()
+start = datetime.now()
 
 RANDOM_SEED = 42
 
-df, label_df = get_dfs(pct_of_df=0.01, pct_meshterms=0.05)
+df, label_df = get_dfs(pct_of_df=0.2, pct_meshterms=0.1)
 
 
 print(label_df.shape)
