@@ -1,6 +1,11 @@
 import pandas as pd
 import gensim
 from gensim import corpora
+from gensim.parsing.preprocessing import STOPWORDS
+import nltk
+#nltk.download('wordnet')
+from nltk.stem import WordNetLemmatizer, SnowballStemmer
+from nltk.stem.porter import *
 import pyLDAvis
 import pyLDAvis.gensim_models
 import pickle
@@ -8,22 +13,34 @@ import os
 import logging
 
 #http://www.cse.chalmers.se/~richajo/dit862/L13/LDA%20with%20gensim%20(small%20example).html
+
 # for gensim to output some progress information while it's training
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)  
 
 
-#Some code inspired from https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0
+#Some code inspired from https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0 & 
+# https://towardsdatascience.com/topic-modeling-and-latent-dirichlet-allocation-in-python-9bf156893c24
 
 # SETTINGS FOR MODEL
 RANDOM_SEED = 7245
-passes = 10
-num_topics=20
+passes = 5
+num_topics=10
+
+addtl_stop_words = ["patient", "patients", "group", "groups" "placebo", "survival", "treatment", "response", "remission",
+                     "day", "days", "week", "weeks", "month", "months", "year", "years", "median"]
+stop_words = STOPWORDS.union(set(addtl_stop_words))
+
+stemmer = SnowballStemmer("english")
+
+def lemmatize_stemming(text):
+   return stemmer.stem(WordNetLemmatizer().lemmatize(text, pos='v'))
 
 def preprocess(text):
    result = []
    for token in gensim.utils.simple_preprocess(text):
-      if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 2:
-         result.append(token)
+      if token not in stop_words and len(token) > 2:
+         result.append(lemmatize_stemming(token))
+   
    return result
 
 
@@ -69,7 +86,7 @@ pickle.dump(ldamodel, open(filename, 'wb'))
 #Visualize the topics
 LDAvis_data_filepath = os.path.join('./results/ldavis_prepared_'+str(num_topics))
 
-LDAvis_prepared = pyLDAvis.gensim_models.prepare(ldamodel, doc_term_matrix, dictionary)
+LDAvis_prepared = pyLDAvis.gensim_models.prepare(ldamodel, corpus, dictionary)
 with open(LDAvis_data_filepath, 'wb') as f:
    pickle.dump(LDAvis_prepared, f)
 
