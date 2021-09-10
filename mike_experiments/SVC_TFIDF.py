@@ -1,4 +1,5 @@
 from get_dataframe import get_dfs
+from write_results import results_to_txt
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,7 +10,7 @@ from sklearn.metrics import hamming_loss, accuracy_score, f1_score, precision_sc
 
 RANDOM_SEED = 42
 
-df, label_df = get_dfs(pct_of_df=0.2, pct_meshterms=0.05)
+df, label_df = get_dfs(pct_of_df=0.02, pct_meshterms=0.05)
 
 print(df.shape)
 print(label_df.shape)
@@ -33,7 +34,7 @@ X_test_tfidf = vetorizer.transform(X_test)
 
 
 svc = SVC(gamma="scale")
-multiout_svc = MultiOutputClassifier(svc, n_jobs=-1)
+multiout_svc = MultiOutputClassifier(svc)
 
 # multiout_svc = MultiOutputClassifier(estimator=SVC(C=1.0, break_ties=False, cache_size=200,
 #                                     class_weight=None, coef0=0.0,
@@ -47,18 +48,28 @@ clf = multiout_svc.fit(X_train_tfidf, y_train)
 
 predicts = clf.predict(X_test_tfidf)
 # print(classification_report(y_test, predicts))
-estimator = clf.get_params()
-accuracy = accuracy_score(y_test, predicts)
-f1_weighted = f1_score(y_test, predicts, average='weighted')
-f1_micro = f1_score(y_test, predicts, average='micro')
-hammingLoss = hamming_loss(y_test, predicts)
-precision_avg_samples = precision_score(y_test, predicts, average='samples')
-class_report = classification_report(y_test, predicts)
 
-txt_body = f"{estimator}\nAccuracy: {accuracy}\nF1 Score (weighted): {f1_weighted}\nF1 Score (micro): {f1_micro}\n\
-Hamming Loss: {hammingLoss}\nPrecision (average by samples): \nClassification Report: \n{class_report} "
+results_to_txt(clf, y_test, predicts, label_df, 'TFIDF')
 
-print(txt_body)
+# estimator = clf.get_params()
+# accuracy = accuracy_score(y_test, predicts)
+# f1_weighted = f1_score(y_test, predicts, average='weighted')
+# f1_micro = f1_score(y_test, predicts, average='micro')
+# hammingLoss = hamming_loss(y_test, predicts)
+# precision_avg_samples = precision_score(y_test, predicts, average='samples')
+# class_report = classification_report(y_test, predicts)
+#
+# txt_body = f"{estimator}\nDataframe Size: {label_df.size}\n\nAccuracy: {accuracy}\nF1 Score (weighted): {f1_weighted}\n\
+# F1 Score (micro): {f1_micro}\nHamming Loss: {hammingLoss}\nPrecision (average by samples): \nClassification Report: \n\
+# {class_report} "
+#
+# print(txt_body)
+# filepath = "/results"
+# filename = f"{estimator['estimator'][:-2]}_tfidf.txt"
+#
+# with open(filename) as file:
+#     file.write(txt_body)
+
 
 
 # print(f"Accuracy: {accuracy_score(y_test, predicts)}")
