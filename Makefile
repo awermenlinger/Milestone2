@@ -1,0 +1,2 @@
+models/trained_lda.sav: LDA_Model.py models/trained_lda_dictionary.sav models/trained_lda_corpus.sav models/trained_lda.sav data/pubmed_articles_cancer_01_smaller.csv data/pubmed_articles_cancer_02_smaller.csv data/pubmed_articles_cancer_03_smaller.csv data/pubmed_articles_cancer_04_smaller.csv
+	python LDA_Model.py models/trained_lda_dictionary.sav models/trained_lda_corpus.sav models/trained_lda.sav data/pubmed_articles_cancer_01_smaller.csv data/pubmed_articles_cancer_02_smaller.csv data/pubmed_articles_cancer_03_smaller.csv data/pubmed_articles_cancer_04_smaller.csv
