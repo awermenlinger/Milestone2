@@ -40,8 +40,11 @@ X_test_tfidf = vetorizer.transform(X_test)
 
 parameters = {'estimator__kernel': ('rbf', 'linear'),
               'estimator__degree': (2, 3),
-              'estimator__gamma': ('scale', 'auto')}
-svc = SVC(random_state=RANDOM_SEED)
+              'estimator__gamma': ('scale', 'auto'),
+              'estimator__decision_function_shape': ('ovo', 'ovr')
+              }
+
+svc = SVC(random_state=RANDOM_SEED,)
 multiout_svc = MultiOutputClassifier(svc)
 clf = GridSearchCV(multiout_svc, parameters)
 clf.fit(X_train_tfidf, y_train)

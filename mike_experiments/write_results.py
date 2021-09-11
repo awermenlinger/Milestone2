@@ -5,13 +5,14 @@ from datetime import datetime
 def results_to_txt(model, y_test, predictions, df, vectorizer, runtime, grid_search_results):
     estimator = model.get_params()
     accuracy = accuracy_score(y_test, predictions)
+    best_model = model.best_estimator_
     f1_weighted = f1_score(y_test, predictions, average='weighted')
     f1_micro = f1_score(y_test, predictions, average='micro')
     hammingloss = hamming_loss(y_test, predictions)
     precision_avg_samples = precision_score(y_test, predictions, average='samples')
     class_report = classification_report(y_test, predictions)
 
-    txt_body = f"{estimator}\nRun Time: {runtime}\nDataframe Size: {df.shape}\n\
+    txt_body = f"{estimator}\nRun Time: {runtime}\nDataframe Size: {df.shape}\nBest Model: {best_model}\n\
 GridSearch Results: {grid_search_results}\n\nAccuracy: {accuracy}\n\
 F1 Score (weighted): {f1_weighted}\nF1 Score (micro): {f1_micro}\nHamming Loss: {hammingloss}\n\
 Precision (average by samples): {precision_avg_samples}\n\nClassification Report: \n{class_report}"
