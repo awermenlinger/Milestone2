@@ -25,7 +25,9 @@ passes = 5
 num_topics=10
 
 addtl_stop_words = ["patient", "patients", "group", "groups" "placebo", "survival", "treatment", "response", "remission",
-                     "day", "days", "week", "weeks", "month", "months", "year", "years", "median"]
+                     "day", "days", "week", "weeks", "month", "months", "year", "years", "median", "result", "results",
+                     "conclusion", "conclusions", "study", "significance", "significant", "arm", "arms", "random", "clinical",
+                     "trial", "trials", "effect"]
 stop_words = STOPWORDS.union(set(addtl_stop_words))
 
 stemmer = SnowballStemmer("english")

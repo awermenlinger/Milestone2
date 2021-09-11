@@ -40,8 +40,6 @@ if __name__ == '__main__':
     #Save the LDA Model
     pickle.dump(ldamodel, open(model_file, 'wb'))
 
-
-
 #from pprint import pprint
 # Print the Keyword in the 10 topics
 #pprint(ldamodel.print_topics())

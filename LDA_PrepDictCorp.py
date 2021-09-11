@@ -36,7 +36,9 @@ data_files = ["data/pubmed_articles_cancer_01_smaller.csv", "data/pubmed_article
 #-----------------------------------------------------------------------
 
 addtl_stop_words = ["patient", "patients", "group", "groups" "placebo", "survival", "treatment", "response", "remission",
-                     "day", "days", "week", "weeks", "month", "months", "year", "years", "median", "dose", "doses", "placebo"]
+                     "day", "days", "week", "weeks", "month", "months", "year", "years", "median", "dose", "doses", "result", "results",
+                     "conclusion", "conclusions", "study", "significance", "significant", "arm", "arms", "random", "clinical",
+                     "trial", "trials", "effect"]
 stop_words = STOPWORDS.union(set(addtl_stop_words))
 
 stemmer = SnowballStemmer("english")
