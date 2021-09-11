@@ -13,7 +13,7 @@ start = datetime.now()
 
 RANDOM_SEED = 42
 
-df, label_df = get_dfs(pct_of_df=0.2, pct_meshterms=0.1)
+df, label_df = get_dfs(pct_of_df=0.02, pct_meshterms=0.01)
 
 
 print(label_df.shape)
@@ -38,8 +38,10 @@ X_test_tfidf = vetorizer.transform(X_test)
 # multiout_svc = MultiOutputClassifier(svc)
 
 
-parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
-svc = SVC()
+parameters = {'estimator__kernel': ('rbf', 'linear'),
+              'estimator__degree': (2, 3),
+              'estimator__gamma': ('scale', 'auto')}
+svc = SVC(random_state=RANDOM_SEED)
 multiout_svc = MultiOutputClassifier(svc)
 clf = GridSearchCV(multiout_svc, parameters)
 clf.fit(X_train_tfidf, y_train)
