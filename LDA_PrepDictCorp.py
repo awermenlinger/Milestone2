@@ -28,6 +28,8 @@ num_topics=10
 dic_file = "models/trained_lda_dictionary.sav"
 corp_file = "models/trained_lda_corpus.sav"
 model_file = "models/trained_lda.sav"
+text_file = "models/trained_lda_texts.sav"
+tfidf_corp_file = "models/trained_lda_tfidf_corpus.sav"
 data_files = ["data/pubmed_articles_cancer_01_smaller.csv", "data/pubmed_articles_cancer_02_smaller.csv",
                 "data/pubmed_articles_cancer_03_smaller.csv","data/pubmed_articles_cancer_04_smaller.csv"]
 
@@ -69,4 +71,10 @@ pickle.dump(dictionary, open(dic_file, 'wb'))
 print ("Building the corpus")
 corpus = [dictionary.doc2bow(doc) for doc in doc_processed]
 #save the corpus
+pickle.dump(corpus, open(corp_file, 'wb')) 
+
+tfidf = gensim.models.TfidfModel(corpus)
+corpus_tfidf = tfidf[corpus]
+#save the tfidf_corpus
+pickle.dump(corpus_tfidf, open(tfidf_corp_file, 'wb'))
 pickle.dump(corpus, open(corp_file, 'wb')) 
