@@ -11,7 +11,7 @@ def results_to_txt(model, y_test, predictions, df, vectorizer, runtime):
     precision_avg_samples = precision_score(y_test, predictions, average='samples')
     class_report = classification_report(y_test, predictions)
 
-    txt_body = f"{estimator}\nRun Time: {runtime}\nDataframe Size: {df.size}\n\nAccuracy: {accuracy}\n\
+    txt_body = f"{estimator}\nRun Time: {runtime}\nDataframe Size: {df.shape}\n\nAccuracy: {accuracy}\n\
 F1 Score (weighted): {f1_weighted}\nF1 Score (micro): {f1_micro}\nHamming Loss: {hammingloss}\n\
 Precision (average by samples): {precision_avg_samples}\n\nClassification Report: \n{class_report}"
 
