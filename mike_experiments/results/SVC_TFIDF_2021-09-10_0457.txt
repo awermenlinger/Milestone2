@@ -1,0 +1,33 @@
+{'estimator__C': 1.0, 'estimator__break_ties': False, 'estimator__cache_size': 200, 'estimator__class_weight': None, 'estimator__coef0': 0.0, 'estimator__decision_function_shape': 'ovr', 'estimator__degree': 3, 'estimator__gamma': 'scale', 'estimator__kernel': 'rbf', 'estimator__max_iter': -1, 'estimator__probability': False, 'estimator__random_state': None, 'estimator__shrinking': True, 'estimator__tol': 0.001, 'estimator__verbose': False, 'estimator': SVC(), 'n_jobs': None}
+Run Time: 6:04:08.944309
+Dataframe Size: 477450
+
+Accuracy: 0.1050515204825333
+F1 Score (weighted): 0.7108316885903876
+F1 Score (micro): 0.7890096416429806
+Hamming Loss: 0.1585741811175337
+Precision (average by samples): 0.8109744811051672
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.69      0.15      0.24      1093
+           1       0.67      0.93      0.78      4741
+           2       0.71      0.94      0.81      4927
+           3       0.77      0.04      0.07      1602
+           4       1.00      0.00      0.00       784
+           5       0.61      0.11      0.18       865
+           6       0.86      1.00      0.92      6503
+           7       0.00      0.00      0.00      1071
+           8       1.00      1.00      1.00      7926
+           9       0.83      0.99      0.90      5486
+          10       0.79      1.00      0.88      5977
+          11       0.60      0.02      0.03       846
+          12       0.84      0.02      0.05      1290
+          13       1.00      0.00      0.00       815
+          14       0.53      0.09      0.15      2139
+
+   micro avg       0.81      0.77      0.79     46065
+   macro avg       0.73      0.42      0.40     46065
+weighted avg       0.79      0.77      0.71     46065
+ samples avg       0.81      0.79      0.77     46065
