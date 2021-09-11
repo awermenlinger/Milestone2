@@ -50,9 +50,9 @@ if __name__ == '__main__':
    grid = {}
    grid['Validation_Set'] = {}
    # Topics range
-   min_topics = 10
-   max_topics = 30
-   step_size = 3
+   min_topics = 16
+   max_topics = 22
+   step_size = 1
    topics_range = range(min_topics, max_topics, step_size)
    # Alpha parameter
    alpha = [0.01, 0.5, 1, 'symmetric', 'asymmetric']

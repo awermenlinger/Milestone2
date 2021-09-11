@@ -2,7 +2,7 @@ import pandas as pd
 import gensim
 from gensim import corpora
 from gensim.parsing.preprocessing import STOPWORDS
-
+from gensim.models import Phrases
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.stem.porter import *
 import pickle
@@ -29,7 +29,7 @@ dic_file = "models/trained_lda_dictionary.sav"
 corp_file = "models/trained_lda_corpus.sav"
 model_file = "models/trained_lda.sav"
 text_file = "models/trained_lda_texts.sav"
-tfidf_corp_file = "models/trained_lda_tfidf_corpus.sav"
+tfidf_corp_file = "models/trained_lda_corpus_tfidf.sav"
 data_files = ["data/pubmed_articles_cancer_01_smaller.csv", "data/pubmed_articles_cancer_02_smaller.csv",
                 "data/pubmed_articles_cancer_03_smaller.csv","data/pubmed_articles_cancer_04_smaller.csv"]
 
@@ -64,6 +64,7 @@ input_data.abstract = input_data.abstract.astype('str')
 
 print ("Preprocessing the abstracts")
 doc_processed = input_data['abstract'].map(preprocess)
+pickle.dump(doc_processed, open(text_file, 'wb'))    
 
 print ("Building the dictionary")
 dictionary = corpora.Dictionary(doc_processed)
@@ -79,4 +80,4 @@ tfidf = gensim.models.TfidfModel(corpus)
 corpus_tfidf = tfidf[corpus]
 #save the tfidf_corpus
 pickle.dump(corpus_tfidf, open(tfidf_corp_file, 'wb'))
-pickle.dump(corpus, open(corp_file, 'wb')) 
+pickle.dump(corpus, open(corp_file, 'wb'))
