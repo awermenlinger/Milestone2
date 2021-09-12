@@ -11,7 +11,7 @@ start = datetime.now()
 
 RANDOM_SEED = 42
 
-df, label_df = get_dfs(pct_of_df=0.02, pct_meshterms=0.01)
+df, label_df = get_dfs(pct_of_df=0.2, pct_meshterms=0.2)
 
 
 print(label_df.shape)

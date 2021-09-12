@@ -1,0 +1,52 @@
+{'cv': None, 'error_score': nan, 'estimator__estimator__algorithm': 'auto', 'estimator__estimator__leaf_size': 30, 'estimator__estimator__metric': 'minkowski', 'estimator__estimator__metric_params': None, 'estimator__estimator__n_jobs': None, 'estimator__estimator__n_neighbors': 5, 'estimator__estimator__p': 2, 'estimator__estimator__weights': 'uniform', 'estimator__estimator': KNeighborsClassifier(), 'estimator__n_jobs': None, 'estimator': MultiOutputClassifier(estimator=KNeighborsClassifier()), 'n_jobs': -1, 'param_grid': {'estimator__n_neighbors': range(2, 7), 'estimator__weights': ['uniform', 'distance']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': 'f1_micro', 'verbose': 0}
+Run Time: 0:07:49.829402
+Dataframe Size: (26525, 11)
+Best Model: MultiOutputClassifier(estimator=KNeighborsClassifier(n_neighbors=6,
+                                                     weights='distance'))
+Best Params: {'estimator__n_neighbors': 6, 'estimator__weights': 'distance'}
+GridSearch Results: {'mean_fit_time': array([0.96741209, 1.01149654, 1.01987376, 1.14150481, 0.90317898,
+       0.71987643, 0.98062234, 0.66185703, 0.86616249, 0.80077314]), 'std_fit_time': array([0.11005661, 0.0987983 , 0.08018075, 0.34849842, 0.06902066,
+       0.07732359, 0.23683719, 0.07061607, 0.07619211, 0.14469544]), 'mean_score_time': array([107.50049634, 105.88518925, 105.87048573, 106.02658176,
+       107.29940467, 107.2066524 , 109.56010351, 104.71949615,
+       105.85191841,  76.37176661]), 'std_score_time': array([ 4.81170417,  3.44534759,  3.18925262,  4.7856893 ,  3.3788281 ,
+        2.90206686,  5.75467841,  2.15541772,  3.04821413, 29.79641079]), 'param_estimator__n_neighbors': masked_array(data=[2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False],
+       fill_value='?',
+            dtype=object), 'param_estimator__weights': masked_array(data=['uniform', 'distance', 'uniform', 'distance',
+                   'uniform', 'distance', 'uniform', 'distance',
+                   'uniform', 'distance'],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False],
+       fill_value='?',
+            dtype=object), 'params': [{'estimator__n_neighbors': 2, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 2, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 3, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 3, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 4, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 4, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 5, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 5, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 6, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 6, 'estimator__weights': 'distance'}], 'split0_test_score': array([0.74132703, 0.78455623, 0.81156057, 0.81161331, 0.79303359,
+       0.81255942, 0.82212343, 0.82221874, 0.81310812, 0.82377586]), 'split1_test_score': array([0.74624981, 0.78738261, 0.81194265, 0.81194265, 0.79597218,
+       0.81462594, 0.82296676, 0.82296676, 0.81310328, 0.82326482]), 'split2_test_score': array([0.74587657, 0.78412639, 0.81039385, 0.81041519, 0.79354984,
+       0.81141322, 0.82111391, 0.82111391, 0.81039588, 0.82066758]), 'split3_test_score': array([0.73717366, 0.78203378, 0.80931801, 0.80925526, 0.79266438,
+       0.81288521, 0.82183532, 0.82183818, 0.81373193, 0.82532123]), 'split4_test_score': array([0.74509569, 0.78496088, 0.81378368, 0.81378368, 0.79516048,
+       0.81362073, 0.82483197, 0.82483197, 0.81657062, 0.82614127]), 'mean_test_score': array([0.74314455, 0.78461198, 0.81139975, 0.81140202, 0.79407609,
+       0.8130209 , 0.82257428, 0.82259391, 0.81338197, 0.82383415]), 'std_test_score': array([0.0034603 , 0.00171372, 0.0015066 , 0.00152261, 0.00127497,
+       0.00107256, 0.0012754 , 0.00126888, 0.00196771, 0.0018915 ]), 'rank_test_score': array([10,  9,  7,  6,  8,  5,  3,  2,  4,  1])}
+
+Accuracy: 0.16838401608444334
+F1 Score (weighted): 0.8144407003793593
+F1 Score (micro): 0.8234487319217721
+Hamming Loss: 0.2264545111837145
+Precision (average by samples): 0.8000519094292654
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.67      0.77      0.71      4741
+           1       0.71      0.84      0.77      4927
+           2       0.40      0.22      0.28      1602
+           3       0.86      0.97      0.91      6503
+           4       1.00      1.00      1.00      7926
+           5       0.80      0.91      0.85      5486
+           6       0.79      0.94      0.86      5977
+           7       0.41      0.29      0.34      2139
+
+   micro avg       0.79      0.86      0.82     39301
+   macro avg       0.70      0.74      0.72     39301
+weighted avg       0.78      0.86      0.81     39301
+ samples avg       0.80      0.87      0.80     39301
