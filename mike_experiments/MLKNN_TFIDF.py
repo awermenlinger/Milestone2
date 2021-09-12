@@ -4,9 +4,7 @@ from datetime import datetime
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.svm import SVC
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.metrics import hamming_loss, accuracy_score, f1_score, precision_score, classification_report
 from skmultilearn.adapt import MLkNN
 
 start = datetime.now()
@@ -44,7 +42,7 @@ parameters = {'estimator__k': rainge(2, 5),
 
 mlknn = MLkNN()
 
-multiout_mlknn = MultiOutputClassifier(mlknn)
+multiout_mlknn = MultiOutputClassifier(mlknn, n_jobs=-1)
 clf = GridSearchCV(multiout_mlknn, parameters, score='f1_micro')
 clf.fit(X_train_tfidf, y_train)
 grid_search_results = clf.cv_results_

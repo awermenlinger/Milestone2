@@ -1,5 +1,6 @@
 from sklearn.metrics import hamming_loss, accuracy_score, f1_score, precision_score, classification_report
 from datetime import datetime
+from configurations import config
 
 
 def results_to_txt(model, y_test, predictions, df, vectorizer, runtime, grid_search_results):
@@ -23,3 +24,14 @@ Precision (average by samples): {precision_avg_samples}\n\nClassification Report
 
     with open(f"{filepath}{filename}", 'w') as file:
         file.write(txt_body)
+
+#
+# import win32com.client as win32
+# outlook = win32.Dispatch('outlook.application')
+# mail = outlook.CreateItem(0)
+# mail.To = f'{config.mike_email}; {config.mike_phone}'
+# mail.Subject = 'Message subject'
+# mail.Body = 'Model is done training\n\n'
+# # mail.HTMLBody = '<h2>Model is done training.</h2>' #this field is optional
+# mail.Send()
+# mail.close()
