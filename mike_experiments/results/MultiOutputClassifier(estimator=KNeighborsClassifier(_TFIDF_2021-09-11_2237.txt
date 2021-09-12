@@ -1,0 +1,156 @@
+{'cv': None, 'error_score': nan, 'estimator__estimator__algorithm': 'auto', 'estimator__estimator__leaf_size': 30, 'estimator__estimator__metric': 'minkowski', 'estimator__estimator__metric_params': None, 'estimator__estimator__n_jobs': None, 'estimator__estimator__n_neighbors': 5, 'estimator__estimator__p': 2, 'estimator__estimator__weights': 'uniform', 'estimator__estimator': KNeighborsClassifier(), 'estimator__n_jobs': None, 'estimator': MultiOutputClassifier(estimator=KNeighborsClassifier()), 'n_jobs': -1, 'param_grid': {'estimator__n_neighbors': range(2, 7), 'estimator__weights': ['uniform', 'distance']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': 'f1_micro', 'verbose': 0}
+Run Time: 0:01:33.101574
+Dataframe Size: (2652, 117)
+Best Model: MultiOutputClassifier(estimator=KNeighborsClassifier())
+Best Params: {'estimator__n_neighbors': 5, 'estimator__weights': 'uniform'}
+GridSearch Results: {'mean_fit_time': array([1.64679971, 1.66973524, 1.77245932, 1.35258384, 1.1993927 ,
+       1.3274508 , 1.19759645, 1.12379589, 1.17027054, 1.06634808]), 'std_fit_time': array([0.06680483, 0.12204602, 0.08291907, 0.2510177 , 0.06063401,
+       0.02944381, 0.10624513, 0.04069531, 0.03133351, 0.03060622]), 'mean_score_time': array([21.71652937, 19.14779968, 21.70635886, 19.95184789, 21.86692891,
+       19.85610557, 22.48040018, 19.95496106, 20.94572353, 13.85286951]), 'std_score_time': array([0.31447927, 0.11931288, 0.33973427, 0.44521713, 0.25700793,
+       0.59776682, 0.45210777, 0.32784522, 0.34742385, 6.32782021]), 'param_estimator__n_neighbors': masked_array(data=[2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False],
+       fill_value='?',
+            dtype=object), 'param_estimator__weights': masked_array(data=['uniform', 'distance', 'uniform', 'distance',
+                   'uniform', 'distance', 'uniform', 'distance',
+                   'uniform', 'distance'],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False],
+       fill_value='?',
+            dtype=object), 'params': [{'estimator__n_neighbors': 2, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 2, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 3, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 3, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 4, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 4, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 5, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 5, 'estimator__weights': 'distance'}, {'estimator__n_neighbors': 6, 'estimator__weights': 'uniform'}, {'estimator__n_neighbors': 6, 'estimator__weights': 'distance'}], 'split0_test_score': array([0.53452579, 0.52765436, 0.60617898, 0.60617898, 0.57895788,
+       0.60240964, 0.62174073, 0.62174073, 0.60730326, 0.62268646]), 'split1_test_score': array([0.52647439, 0.52671877, 0.59885756, 0.59885756, 0.58519438,
+       0.60029608, 0.62461774, 0.62461774, 0.60691888, 0.62154433]), 'split2_test_score': array([0.51294018, 0.52684617, 0.59623052, 0.59623052, 0.57299939,
+       0.59626879, 0.61385395, 0.61385395, 0.5968775 , 0.61374274]), 'split3_test_score': array([0.54878551, 0.53426141, 0.61255526, 0.61255526, 0.5955414 ,
+       0.60976043, 0.63171402, 0.63171402, 0.6110675 , 0.62985459]), 'split4_test_score': array([0.52961816, 0.53422526, 0.59385544, 0.59385544, 0.58601286,
+       0.59665956, 0.61501211, 0.61501211, 0.60478923, 0.61781076]), 'mean_test_score': array([0.53046881, 0.52994119, 0.60153555, 0.60153555, 0.58374118,
+       0.6010789 , 0.62138771, 0.62138771, 0.60539128, 0.62112778]), 'std_test_score': array([0.01162663, 0.00352733, 0.00688904, 0.00688904, 0.00754697,
+       0.00490755, 0.00655128, 0.00655128, 0.00471287, 0.00537218]), 'rank_test_score': array([ 9, 10,  5,  5,  8,  7,  1,  1,  4,  3])}
+
+Accuracy: 0.01256281407035176
+F1 Score (weighted): 0.5226596601647302
+F1 Score (micro): 0.6167477414871438
+Hamming Loss: 0.04862029445472979
+Precision (average by samples): 0.7531090036429231
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.50      0.04      0.07        25
+           1       0.43      0.15      0.22       103
+           2       0.65      0.76      0.70       479
+           3       0.00      0.00      0.00        15
+           4       0.69      0.81      0.74       497
+           5       0.39      0.24      0.29       156
+           6       0.00      0.00      0.00        10
+           7       1.00      0.06      0.12        16
+           8       0.00      0.00      0.00        17
+           9       0.00      0.00      0.00        11
+          10       0.00      0.00      0.00        15
+          11       0.00      0.00      0.00         8
+          12       0.50      0.04      0.07        27
+          13       0.00      0.00      0.00         9
+          14       0.00      0.00      0.00        15
+          15       0.00      0.00      0.00         9
+          16       0.44      0.11      0.18        71
+          17       0.31      0.12      0.18        88
+          18       1.00      0.50      0.67        10
+          19       0.00      0.00      0.00         9
+          20       0.00      0.00      0.00        14
+          21       0.00      0.00      0.00        10
+          22       0.00      0.00      0.00         6
+          23       1.00      0.15      0.27        13
+          24       0.67      0.13      0.22        15
+          25       0.50      0.07      0.12        28
+          26       0.00      0.00      0.00        11
+          27       0.54      0.14      0.22        50
+          28       0.38      0.09      0.15        33
+          29       0.00      0.00      0.00        28
+          30       0.00      0.00      0.00        13
+          31       0.00      0.00      0.00        31
+          32       0.00      0.00      0.00        23
+          33       0.54      0.11      0.18        63
+          34       0.00      0.00      0.00        10
+          35       0.20      0.05      0.07        22
+          36       1.00      0.17      0.29        12
+          37       0.00      0.00      0.00        12
+          38       0.00      0.00      0.00        40
+          39       0.43      0.18      0.25        91
+          40       0.67      0.20      0.31        20
+          41       0.44      0.08      0.14        49
+          42       0.53      0.23      0.32        39
+          43       0.33      0.08      0.13        12
+          44       0.33      0.16      0.22        63
+          45       0.00      0.00      0.00        10
+          46       0.00      0.00      0.00         8
+          47       0.00      0.00      0.00        17
+          48       0.00      0.00      0.00        29
+          49       0.00      0.00      0.00        10
+          50       0.00      0.00      0.00        18
+          51       0.85      0.97      0.91       650
+          52       0.25      0.14      0.18        22
+          53       0.29      0.07      0.11       101
+          54       0.67      0.20      0.31        10
+          55       1.00      1.00      1.00       792
+          56       0.00      0.00      0.00         9
+          57       0.00      0.00      0.00        18
+          58       0.25      0.04      0.07        23
+          59       0.29      0.07      0.11        30
+          60       0.00      0.00      0.00        13
+          61       0.00      0.00      0.00        18
+          62       0.43      0.33      0.38         9
+          63       1.00      0.08      0.15        12
+          64       0.60      0.13      0.21        23
+          65       0.20      0.06      0.10        16
+          66       0.79      0.91      0.85       553
+          67       0.50      0.17      0.25        24
+          68       0.00      0.00      0.00         9
+          69       0.79      0.93      0.86       604
+          70       0.00      0.00      0.00         9
+          71       0.00      0.00      0.00        10
+          72       0.17      0.06      0.09        34
+          73       0.00      0.00      0.00        18
+          74       0.30      0.07      0.12        84
+          75       0.20      0.07      0.10        15
+          76       0.00      0.00      0.00        13
+          77       0.60      0.43      0.50         7
+          78       0.00      0.00      0.00        15
+          79       0.00      0.00      0.00        31
+          80       0.20      0.05      0.08        21
+          81       0.50      0.08      0.14        12
+          82       0.00      0.00      0.00        10
+          83       0.44      0.05      0.09        84
+          84       0.00      0.00      0.00        20
+          85       0.23      0.07      0.11       125
+          86       0.89      0.21      0.34        38
+          87       0.00      0.00      0.00        10
+          88       0.50      0.10      0.17        20
+          89       1.00      0.09      0.17        11
+          90       0.00      0.00      0.00        12
+          91       0.60      0.38      0.46         8
+          92       0.27      0.12      0.17        24
+          93       0.43      0.11      0.18        27
+          94       0.50      0.08      0.14        24
+          95       0.00      0.00      0.00        32
+          96       0.00      0.00      0.00        13
+          97       0.30      0.07      0.12        40
+          98       0.00      0.00      0.00        11
+          99       0.43      0.07      0.13        40
+         100       0.00      0.00      0.00        12
+         101       0.33      0.07      0.11        15
+         102       0.17      0.05      0.08        59
+         103       0.37      0.07      0.12        94
+         104       0.00      0.00      0.00        46
+         105       0.40      0.13      0.20        15
+         106       0.00      0.00      0.00        10
+         107       0.75      0.33      0.46         9
+         108       0.00      0.00      0.00         9
+         109       0.34      0.21      0.26       202
+         110       0.00      0.00      0.00        11
+         111       0.00      0.00      0.00        12
+         112       1.00      0.38      0.56        13
+         113       0.00      0.00      0.00        47
+
+   micro avg       0.74      0.53      0.62      6698
+   macro avg       0.28      0.12      0.14      6698
+weighted avg       0.58      0.53      0.52      6698
+ samples avg       0.75      0.56      0.62      6698

@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
-from skmultilearn.adapt import MLkNN
+from sklearn.neighbors import KNeighborsClassifier
 
 start = datetime.now()
 
@@ -36,14 +36,14 @@ X_test_tfidf = vetorizer.transform(X_test)
 # multiout_svc = MultiOutputClassifier(svc)
 
 
-parameters = {'estimator__k': rainge(2, 5),
-              'estimator__s': [0.5, 0.7, 1.0],
+parameters = {'estimator__n_neighbors': range(2, 7),
+              'estimator__weights': ['uniform', 'distance'],
               }
 
-mlknn = MLkNN()
+knn = KNeighborsClassifier()
 
-multiout_mlknn = MultiOutputClassifier(mlknn, n_jobs=-1)
-clf = GridSearchCV(multiout_mlknn, parameters, score='f1_micro')
+multiout_knn = MultiOutputClassifier(knn)
+clf = GridSearchCV(multiout_knn, parameters, scoring='f1_micro', n_jobs=-1)
 clf.fit(X_train_tfidf, y_train)
 grid_search_results = clf.cv_results_
 
