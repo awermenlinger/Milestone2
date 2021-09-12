@@ -41,7 +41,7 @@ parameters = {'estimator__n_estimators': [50,100,200],
 etc = ExtraTreesClassifier(random_state=RANDOM_SEED)
 
 multiout_etc = MultiOutputClassifier(etc)
-clf = GridSearchCV(multiout_etc, parameters, scoring='f1_micro', n_jobs=-1)
+clf = GridSearchCV(multiout_etc, parameters, scoring='f1_micro', n_jobs=4)
 clf.fit(X_train_tfidf, y_train)
 grid_search_results = clf.cv_results_
 
