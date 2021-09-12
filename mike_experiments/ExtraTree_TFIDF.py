@@ -34,7 +34,7 @@ X_test_tfidf = vetorizer.transform(X_test)
 
 parameters = {'estimator__n_estimators': [50,100,200],
               'estimator__criterion': ['gini', 'entropy'],
-              'estimator__max_features': ['auto', 'sqrt', 'log2']
+              'estimator__max_features': ['auto', 'sqrt', 'log2'],
               'estimator__warm_start': [True, False]
               }
 
