@@ -21,10 +21,10 @@ if __name__ == '__main__':
    # SETTINGS FOR MODEL
    RANDOM_SEED = 7245
    #chunk_size = 5000
-   dic_file = "models/trained_lda_dictionary.sav"
-   corp_file = "models/trained_lda_corpus.sav"
-   model_file = "models/trained_lda.sav"
-   text_file = "models/trained_lda_texts.sav"
+   dic_file = "models/bi_trained_lda_dictionary.sav"
+   corp_file = "models/bi_trained_lda_corpus.sav"
+   model_file = "models/bi_trained_lda.sav"
+   text_file = "models/bi_trained_lda_texts.sav"
 
    print ("Loading the dic, corpus and model")
    dictionary = pickle.load(open(dic_file, 'rb'))
@@ -53,7 +53,8 @@ if __name__ == '__main__':
    min_topics = 15
    max_topics = 23
    step_size = 2
-   topics_range = range(min_topics, max_topics, step_size)
+   #topics_range = [15,17,19,21,23]
+   topics_range = [15]
    # Alpha parameter
    alpha = [0.01, 0.5, 1, 'symmetric', 'asymmetric']
    # Beta parameter
@@ -73,7 +74,7 @@ if __name__ == '__main__':
                   }
    # Can take a long time to run
    if 1 == 1:
-      pbar = tqdm.tqdm(total=60)
+      pbar = tqdm.tqdm(total=20)
       
       # iterate through validation corpuses
       for i in range(len(corpus_sets)):
@@ -94,5 +95,5 @@ if __name__ == '__main__':
                      model_results['Coherence'].append(cv)
                      
                      pbar.update(1)
-      pd.DataFrame(model_results).to_csv('results/lda_tuning_results.csv', index=False)
+      pd.DataFrame(model_results).to_csv('results/lda_tuning_results_15.csv', index=False)
       pbar.close()

@@ -9,9 +9,9 @@ import logging
 
 # SETTINGS FOR MODEL
 RANDOM_SEED = 7245
-dic_file = "models/trained_lda_dictionary.sav"
-corp_file = "models/trained_lda_corpus.sav"
-model_file = "models/trained_hdp.sav"
+dic_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda_dictionary.sav"
+corp_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda_corpus.sav"
+model_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_hdp.sav"
 #for gensim to output some progress information while it's training
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 print ("Loading the dic, corpus and model")

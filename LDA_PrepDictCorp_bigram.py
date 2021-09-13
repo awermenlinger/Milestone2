@@ -25,11 +25,11 @@ chunk_size = 5000
 passes = 5
 num_topics=10
 
-bi_dic_file = "models/trained_lda_dictionary.sav"
-bi_corp_file = "models/trained_lda_corpus.sav"
-bi_model_file = "models/trained_lda.sav"
-bi_text_file = "models/trained_lda_texts.sav"
-bi_tfidf_corp_file = "models/trained_lda_corpus_tfidf.sav"
+bi_dic_file = "models/bi_trained_lda_dictionary.sav"
+bi_corp_file = "models/bi_trained_lda_corpus.sav"
+bi_model_file = "models/bi_trained_lda.sav"
+bi_text_file = "models/bi_trained_lda_texts.sav"
+bi_tfidf_corp_file = "models/bi_trained_lda_corpus_tfidf.sav"
 data_files = ["data/pubmed_articles_cancer_01_smaller.csv", "data/pubmed_articles_cancer_02_smaller.csv",
                 "data/pubmed_articles_cancer_03_smaller.csv","data/pubmed_articles_cancer_04_smaller.csv"]
 
@@ -66,15 +66,17 @@ print ("Preprocessing the abstracts")
 doc_processed = input_data['abstract'].map(preprocess)
 
 # Add bigrams and trigrams to docs (only ones that appear 20 times or more).
-doc_processed_bigram = doc_processed.copy()
+doc_processed_bigram = list(doc_processed)
+
 bigram = Phrases(doc_processed_bigram, min_count=20)
+
 for idx in range(len(doc_processed_bigram)):
     for token in bigram[doc_processed_bigram[idx]]:
         if '_' in token:
             # Token is a bigram, add to document.
             doc_processed_bigram[idx].append(token)
 
-pickle.dump(doc_processed_bigram, open(bi_dic_file, 'wb'))
+pickle.dump(doc_processed_bigram, open(bi_text_file, 'wb'))
 
 print ("Building the dictionary")
 dictionary = corpora.Dictionary(doc_processed)
@@ -90,5 +92,3 @@ tfidf = gensim.models.TfidfModel(corpus)
 corpus_tfidf = tfidf[corpus]
 #save the tfidf_corpus
 pickle.dump(corpus_tfidf, open(bi_tfidf_corp_file, 'wb'))
-pickle.dump(corpus, open(bi_corp_file, 'wb'))
-
