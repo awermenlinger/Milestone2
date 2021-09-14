@@ -9,7 +9,6 @@ import logging
 #nltk.download('wordnet')
 from multiprocessing import Process, freeze_support
 
-
 #http://www.cse.chalmers.se/~richajo/dit862/L13/LDA%20with%20gensim%20(small%20example).html
 
 #Some code inspired from https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0 & 
@@ -21,11 +20,11 @@ if __name__ == '__main__':
    # SETTINGS FOR MODEL
    RANDOM_SEED = 7245
    #chunk_size = 5000
-   dic_file = "models/bi_trained_lda_dictionary.sav"
-   corp_file = "models/bi_trained_lda_corpus.sav"
-   model_file = "models/bi_trained_lda.sav"
-   text_file = "models/bi_trained_lda_texts.sav"
-
+   dic_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda_dictionary.sav"
+   corp_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda_corpus.sav"
+   model_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda.sav"
+   text_file = "drive/MyDrive/Colab Notebooks/assets/models/bi_trained_lda_texts.sav"
+   
    print ("Loading the dic, corpus and model")
    dictionary = pickle.load(open(dic_file, 'rb'))
    corpus = pickle.load(open(corp_file, 'rb')) 
@@ -37,11 +36,9 @@ if __name__ == '__main__':
       lda_model = gensim.models.LdaMulticore(corpus=corpus,
                                              id2word=dictionary,
                                              num_topics=k, 
-                                             random_state=100,
-                                             chunksize=100,
-                                             passes=10,
-                                             alpha=a,
-                                             eta=b)
+                                             random_state=RANDOM_SEED,
+                                             chunksize=2000,
+                                             passes=10)
       
       coherence_model_lda = CoherenceModel(model=lda_model, texts=texts, dictionary=dictionary, coherence='c_v')
       
@@ -50,15 +47,11 @@ if __name__ == '__main__':
    grid = {}
    grid['Validation_Set'] = {}
    # Topics range
-   min_topics = 15
-   max_topics = 23
-   step_size = 2
-   #topics_range = [15,17,19,21,23]
-   topics_range = [15]
-   # Alpha parameter
-   alpha = [0.01, 0.5, 1, 'symmetric', 'asymmetric']
-   # Beta parameter
-   beta = [0.01, 0.5, 1,'symmetric']
+   topics_range = [15,17,19,21,23] #testing to see if HDP is really giving good results
+   # Alpha parameter - used the best from standard hypertuning (took too much time to retrain)
+   alpha = [0.5]
+   # Beta parameter - used the best from standard hypertuning (took too much time to retrain)
+   beta = [0.5]
    # Validation sets
    num_of_docs = len(corpus)
    corpus_sets = [# gensim.utils.ClippedCorpus(corpus, num_of_docs*0.25), 
@@ -74,7 +67,7 @@ if __name__ == '__main__':
                   }
    # Can take a long time to run
    if 1 == 1:
-      pbar = tqdm.tqdm(total=20)
+      pbar = tqdm.tqdm(total=8)
       
       # iterate through validation corpuses
       for i in range(len(corpus_sets)):
@@ -93,7 +86,9 @@ if __name__ == '__main__':
                      model_results['Alpha'].append(a)
                      model_results['Beta'].append(b)
                      model_results['Coherence'].append(cv)
-                     
+                     print(corpus_title[i], " | ", k, " | ", a, " | ", b, " | ", cv)
+
+
                      pbar.update(1)
-      pd.DataFrame(model_results).to_csv('results/lda_tuning_results_15.csv', index=False)
+      pd.DataFrame(model_results).to_csv('drive/MyDrive/Colab Notebooks/assets/results/lda_tuning_results_bigram.csv', index=False)
       pbar.close()
