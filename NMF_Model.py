@@ -5,6 +5,7 @@ from gensim.corpora import dictionary
 from sklearn.decomposition import NMF
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import normalize
+import numpy as np
 
 num_topics=19
 
@@ -47,23 +48,12 @@ print("saving...")
 result_file = 'models/bi_trained_NMF_model_sklearn_df.sav'
 pickle.dump(results_NMF, open(result_file, 'wb'))
 
-print(results_NMF)
+print("transforming original abstracts to get model weights...")
+abstracts_tfidf_nmf = model.transform(abstracts_tfidf)
 
+result_arrays = 'models/bi_trained_NMF_model_sklearn_res_array.npy'
+np.save(result_arrays, abstracts_tfidf_nmf)
 
-# dictionary = 'models/bi_trained_lda_dictionary.sav'
-# tfidf_corpus = pickle.load(open(tf_idf_file, 'rb'))
-# tfidf_corpus = list(tfidf_corpus)
-# print("training...")
-
-# model = NMF(n_components=19, init='nndsvd');
-
-# #fit the model
-# model.fit(tfidf_corpus)
-
-# nmf = Nmf(corpus=tfidf_corpus, num_topics=19, id2word=dictionary, random_state=7245)
-# nmf.train()
-# print("saving...")
-# result_file = 'models/bi_trained_NMF_model_gensim.sav'
-# pickle.dump(model, open(result_file, 'wb'))
-# result_file = 'models/bi_trained_NMF_model_sklearn.sav'
-# pickle.dump(model, open(result_file, 'wb'))
+print(abstracts_tfidf_nmf[0])
+print(type(abstracts_tfidf_nmf))
+print(abstracts_tfidf_nmf.shape)
