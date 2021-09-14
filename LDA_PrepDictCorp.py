@@ -29,6 +29,7 @@ dic_file = "models/trained_lda_dictionary.sav"
 corp_file = "models/trained_lda_corpus.sav"
 model_file = "models/trained_lda.sav"
 text_file = "models/trained_lda_texts.sav"
+raw_text_file = "models/raw_texts.sav"
 tfidf_corp_file = "models/trained_lda_corpus_tfidf.sav"
 data_files = ["data/pubmed_articles_cancer_01_smaller.csv", "data/pubmed_articles_cancer_02_smaller.csv",
                 "data/pubmed_articles_cancer_03_smaller.csv","data/pubmed_articles_cancer_04_smaller.csv"]
@@ -61,6 +62,9 @@ for file in data_files:
     input_data = input_data.append(df_load)
 
 input_data.abstract = input_data.abstract.astype('str')
+
+docs = list(input_data['abstract'])
+pickle.dump(docs, open(raw_text_file, 'wb'))
 
 print ("Preprocessing the abstracts")
 doc_processed = input_data['abstract'].map(preprocess)
