@@ -1,5 +1,7 @@
 import pandas as pd
+import numpy as np
 import gensim
+from multiprocessing import  Pool
 from gensim import corpora
 from gensim.parsing.preprocessing import STOPWORDS
 from gensim.models import Phrases
@@ -8,8 +10,8 @@ from nltk.stem.porter import *
 import pickle
 import os
 import logging
-#import nltk
-#nltk.download('wordnet')
+# import nltk
+# nltk.download('wordnet')
 
 #http://www.cse.chalmers.se/~richajo/dit862/L13/LDA%20with%20gensim%20(small%20example).html
 
@@ -57,34 +59,38 @@ def preprocess(text):
 input_data = pd.DataFrame()
 print ("loading the files")
 for file in data_files:
-    df_load = pd.read_csv(file,skip_blank_lines=True)
+    print(file)
+    df_load = pd.read_csv(file,skip_blank_lines=True, engine="python")
     input_data = input_data.append(df_load)
 
 input_data.abstract = input_data.abstract.astype('str')
 
 print ("Preprocessing the abstracts")
+
 doc_processed = input_data['abstract'].map(preprocess)
 
 # Add bigrams and trigrams to docs (only ones that appear 20 times or more).
 doc_processed_bigram = list(doc_processed)
 
 bigram = Phrases(doc_processed_bigram, min_count=20)
-
 for idx in range(len(doc_processed_bigram)):
     for token in bigram[doc_processed_bigram[idx]]:
         if '_' in token:
             # Token is a bigram, add to document.
             doc_processed_bigram[idx].append(token)
 
-pickle.dump(doc_processed_bigram, open(bi_text_file, 'wb'))
+#save the texts
+pickle.dump(doc_processed_bigram, open(bi_text_file, 'wb')) 
 
 print ("Building the dictionary")
-dictionary = corpora.Dictionary(doc_processed)
+dictionary = corpora.Dictionary(doc_processed_bigram)
+dictionary.filter_extremes(no_below=5, no_above=0.5)
+
 #save the dictionary
 pickle.dump(dictionary, open(bi_dic_file, 'wb'))      
 
 print ("Building the corpus")
-corpus = [dictionary.doc2bow(doc) for doc in doc_processed]
+corpus = [dictionary.doc2bow(doc) for doc in doc_processed_bigram]
 #save the corpus
 pickle.dump(corpus, open(bi_corp_file, 'wb')) 
 
@@ -92,3 +98,4 @@ tfidf = gensim.models.TfidfModel(corpus)
 corpus_tfidf = tfidf[corpus]
 #save the tfidf_corpus
 pickle.dump(corpus_tfidf, open(bi_tfidf_corp_file, 'wb'))
+
