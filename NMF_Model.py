@@ -57,3 +57,4 @@ np.save(result_arrays, abstracts_tfidf_nmf)
 print(abstracts_tfidf_nmf[0])
 print(type(abstracts_tfidf_nmf))
 print(abstracts_tfidf_nmf.shape)
+
