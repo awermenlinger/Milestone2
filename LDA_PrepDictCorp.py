@@ -72,6 +72,8 @@ pickle.dump(doc_processed, open(text_file, 'wb'))
 
 print ("Building the dictionary")
 dictionary = corpora.Dictionary(doc_processed)
+dictionary.filter_extremes(no_below=5, no_above=0.5)
+
 #save the dictionary
 pickle.dump(dictionary, open(dic_file, 'wb'))      
 
