@@ -1,5 +1,6 @@
 import gensim
 from gensim.parsing.preprocessing import STOPWORDS
+from gensim.models import CoherenceModel
 import pickle
 import logging
 #import nltk
@@ -19,12 +20,17 @@ if __name__ == '__main__':
     freeze_support()
     # SETTINGS FOR MODEL
     RANDOM_SEED = 7245
-    chunk_size = 5000
-    passes = 5
-    num_topics=10
+    chunk_size = 2000
+    passes = 10
+    num_topics=21
     dic_file = "models/trained_lda_dictionary.sav"
     tfidf_corp_file = "models/trained_lda_corpus_tfidf.sav"
-    model_file = "models/trained_lda.sav"
+    model_file = "models/trained_lda_tfidf.sav"
+    text_file = "models/trained_lda_texts.sav"
+    texts = pickle.load(open(text_file, 'rb')) 
+
+
+
     #for gensim to output some progress information while it's training
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     print ("Loading the dic, corpus and model")
@@ -36,11 +42,9 @@ if __name__ == '__main__':
     #LDA = gensim.models.ldamodel.LdaModel
     #ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED)
     LDA = gensim.models.LdaMulticore
-    ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED) #chunksize=chunk_size, 
+    ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED,  alpha="symmetric", eta=1) 
     #Save the LDA Model
     pickle.dump(ldamodel, open(model_file, 'wb'))
 
-#from pprint import pprint
-# Print the Keyword in the 10 topics
-#pprint(ldamodel.print_topics())
-
+    coherence_model_lda = CoherenceModel(model=ldamodel, texts=texts, dictionary=dictionary, coherence='c_v')
+    print ("Coherence with 21 topics, alpha=symmetric and beta=1 : {}".format(coherence_model_lda.get_coherence()))
