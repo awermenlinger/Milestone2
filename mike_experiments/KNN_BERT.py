@@ -26,11 +26,6 @@ X_bert = model.encode(X)
 # splitting the data to training and testing data set
 X_train, X_test, y_train, y_test = train_test_split(X_bert, y, test_size=0.30, random_state=RANDOM_SEED)
 
-# svc = SVC(decision_function_shape='ovo', degree=2, kernel='linear', random_state=42)
-# multiout_svc = MultiOutputClassifier(svc)
-# clf = multiout_svc.fit(X_train, y_train)
-# predicts = clf.predict(X_test)
-
 
 knn = KNeighborsClassifier(n_neighbors=6, weights='distance')
 
