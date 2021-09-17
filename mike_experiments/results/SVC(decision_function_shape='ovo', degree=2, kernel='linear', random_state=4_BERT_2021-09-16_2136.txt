@@ -1,0 +1,81 @@
+{'estimator__C': 1.0, 'estimator__break_ties': False, 'estimator__cache_size': 200, 'estimator__class_weight': None, 'estimator__coef0': 0.0, 'estimator__decision_function_shape': 'ovo', 'estimator__degree': 2, 'estimator__gamma': 'scale', 'estimator__kernel': 'linear', 'estimator__max_iter': -1, 'estimator__probability': False, 'estimator__random_state': 42, 'estimator__shrinking': True, 'estimator__tol': 0.001, 'estimator__verbose': False, 'estimator': SVC(decision_function_shape='ovo', degree=2, kernel='linear', random_state=42), 'n_jobs': None}
+Run Time: 0:02:09.079512
+Dataframe Size: (1327, 63)
+Best Model: No GridSearchCV
+Best Params: No GridSearchCV
+GridSearch Results: None
+
+Accuracy: 0.010025062656641603
+F1 Score (weighted): 0.5970395029589277
+F1 Score (micro): 0.5965362411802437
+Hamming Loss: 0.10509607351712615
+Precision (average by samples): 0.6013380235382609
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.26      0.38      0.31        13
+           1       0.38      0.46      0.42        61
+           2       0.67      0.66      0.66       244
+           3       0.00      0.00      0.00         7
+           4       0.71      0.76      0.74       237
+           5       0.29      0.29      0.29        83
+           6       0.09      0.06      0.07        18
+           7       0.33      0.36      0.34        36
+           8       0.35      0.35      0.35        43
+           9       0.57      0.33      0.42        12
+          10       0.00      0.00      0.00        15
+          11       0.41      0.36      0.39        33
+          12       0.17      0.17      0.17        23
+          13       0.27      0.17      0.21        18
+          14       0.43      0.47      0.45        19
+          15       0.00      0.00      0.00         8
+          16       0.18      0.20      0.19        30
+          17       0.50      0.36      0.42        11
+          18       0.00      0.00      0.00        20
+          19       0.26      0.24      0.25        38
+          20       0.75      0.33      0.46         9
+          21       0.14      0.24      0.18        25
+          22       0.48      0.38      0.43        26
+          23       0.27      0.50      0.35         8
+          24       0.22      0.20      0.21        35
+          25       0.06      0.09      0.07        11
+          26       0.00      0.00      0.00         7
+          27       0.87      0.87      0.87       322
+          28       0.20      0.11      0.14         9
+          29       0.29      0.30      0.29        53
+          30       1.00      1.00      1.00       398
+          31       0.23      0.27      0.25        11
+          32       0.09      0.15      0.11        13
+          33       0.06      0.09      0.07        11
+          34       0.20      0.20      0.20         5
+          35       0.83      0.88      0.86       278
+          36       0.15      0.19      0.17        16
+          37       0.81      0.83      0.82       298
+          38       0.21      0.23      0.22        13
+          39       0.24      0.31      0.27        45
+          40       0.36      0.40      0.38        10
+          41       0.08      0.09      0.09        11
+          42       0.00      0.00      0.00         5
+          43       0.18      0.20      0.19        41
+          44       0.42      0.32      0.37        77
+          45       0.50      0.52      0.51        23
+          46       0.40      0.18      0.25        11
+          47       0.12      0.10      0.11        10
+          48       0.20      0.09      0.13        11
+          49       0.23      0.35      0.28        17
+          50       0.25      0.23      0.24        13
+          51       0.31      0.36      0.33        14
+          52       0.12      0.14      0.13        21
+          53       0.20      0.17      0.18        18
+          54       0.33      0.50      0.40         8
+          55       0.15      0.13      0.14        30
+          56       0.16      0.23      0.18        31
+          57       0.06      0.07      0.07        27
+          58       0.41      0.36      0.38       112
+          59       0.18      0.17      0.18        35
+
+   micro avg       0.59      0.60      0.60      3087
+   macro avg       0.29      0.29      0.29      3087
+weighted avg       0.60      0.60      0.60      3087
+ samples avg       0.60      0.63      0.59      3087

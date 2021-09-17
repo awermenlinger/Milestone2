@@ -30,8 +30,13 @@ def send_email_report(txt_body):
 def results_to_txt(model, y_test, predictions, df, vectorizer, runtime, grid_search_results):
     estimator = model.get_params()
     accuracy = accuracy_score(y_test, predictions)
-    best_model = model.best_estimator_
-    best_params = model.best_params_
+
+    if grid_search_results:
+        best_params = model.best_params_
+        best_model = model.best_estimator_
+    else:
+        best_params = "No GridSearchCV"
+        best_model = "No GridSearchCV"
     f1_weighted = f1_score(y_test, predictions, average='weighted')
     f1_micro = f1_score(y_test, predictions, average='micro')
     hammingloss = hamming_loss(y_test, predictions)
