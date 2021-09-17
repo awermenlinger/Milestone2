@@ -2,7 +2,6 @@ from get_dataframe import get_dfs
 from write_results import results_to_txt
 from datetime import datetime
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.svm import SVC
@@ -10,19 +9,14 @@ from sentence_transformers import SentenceTransformer
 
 
 start = datetime.now()
-
-
-
 RANDOM_SEED = 42
 
 df, label_df = get_dfs(pct_of_df=0.02, pct_meshterms=0.02)
-
 
 print(label_df.shape)
 
 
 y = np.asarray(label_df.iloc[:, :-3].values)
-
 X = label_df['abstract']
 
 # splitting the data to training and testing data set
@@ -35,14 +29,6 @@ model = SentenceTransformer('bert-base-uncased')
 X_train_bert = model.encode(X_train)
 X_test_bert = model.encode(X_test)
 
-
-# parameters = {'estimator__n_estimators': [50,100,200],
-#               'estimator__criterion': ['gini', 'entropy'],
-#               'estimator__max_features': ['auto', 'sqrt', 'log2'],
-#               'estimator__warm_start': [True, False]
-#               }
-
-# etc = ExtraTreesClassifier(random_state=RANDOM_SEED)
 
 svc = SVC(decision_function_shape='ovo', degree=2, kernel='linear', random_state=42)
 multiout_svc = MultiOutputClassifier(svc)
