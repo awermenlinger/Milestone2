@@ -1,0 +1,27 @@
+{'estimator__algorithm': 'auto', 'estimator__leaf_size': 15, 'estimator__metric': 'euclidean', 'estimator__metric_params': None, 'estimator__n_jobs': None, 'estimator__n_neighbors': 5, 'estimator__p': 1, 'estimator__weights': 'uniform', 'estimator': KNeighborsClassifier(leaf_size=15, metric='euclidean', p=1), 'n_jobs': None}
+Run Time: 0:29:32.042747
+Dataframe Size: (21078, 9)
+Best Model: No GridSearchCV
+Best Params: No GridSearchCV
+GridSearch Results: None
+
+Accuracy: 0.39215686274509803
+F1 Score (weighted): 0.8861322013445162
+F1 Score (micro): 0.88469053217207
+Hamming Loss: 0.1835336285051655
+Precision (average by samples): 0.8539663714948346
+
+Classification Report: 
+              precision    recall  f1-score   support
+
+           0       0.67      0.72      0.69      3624
+           1       0.74      0.86      0.79      4042
+           2       0.91      0.98      0.95      5425
+           3       1.00      1.00      1.00      6298
+           4       0.88      0.95      0.91      4711
+           5       0.81      0.94      0.87      4833
+
+   micro avg       0.85      0.92      0.88     28933
+   macro avg       0.83      0.91      0.87     28933
+weighted avg       0.85      0.92      0.89     28933
+ samples avg       0.85      0.93      0.86     28933

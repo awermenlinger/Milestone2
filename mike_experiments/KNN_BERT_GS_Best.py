@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer, models
 start = datetime.now()
 RANDOM_SEED = 42
 print('getting dataframes')
-df, label_df = get_dfs(pct_of_df=0.5, pct_meshterms=0.2)
+df, label_df = get_dfs(pct_of_df=1, pct_meshterms=1)
 
 print(label_df.shape)
 
