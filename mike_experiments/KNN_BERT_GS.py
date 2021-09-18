@@ -35,28 +35,22 @@ X_train, X_test, y_train, y_test = train_test_split(X_bert, y, test_size=0.30, r
 #
 # grid_search_results = None
 
-parameters = {'estimator__n_neighbors': range(2, 7),
+parameters = {'estimator__n_neighbors': range(3, 7),
               'estimator__weights': ['uniform', 'distance'],
-              'estimator__algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
+              'estimator__algorithm': ['auto', 'kd_tree'],
               'estimator__leaf_size': [15, 30, 45],
               'estimator__metric': ['euclidean',
-                                    'manhattan',
-                                    'chebyshev',
                                     'minkowski',
-                                    'wminkowski',
-                                    'seuclidean',
-                                    'mahalanobis',
                                     'hamming',
-                                    'canberra',
-                                    'braycurtis'
+                                    'jaccard'
                                     ],
-              'estimator__p': [1, 2, 3, 4],
+              'estimator__p': [1, 2, 3],
               }
 
 knn = KNeighborsClassifier()
 
 multiout_knn = MultiOutputClassifier(knn)
-clf = GridSearchCV(multiout_knn, parameters, scoring='f1_micro', n_jobs=-1)
+clf = GridSearchCV(multiout_knn, parameters, scoring='f1_micro', n_jobs=6)
 clf.fit(X_train, y_train)
 grid_search_results = clf.cv_results_
 
