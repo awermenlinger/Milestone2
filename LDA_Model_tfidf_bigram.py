@@ -7,6 +7,12 @@ import logging
 #nltk.download('wordnet')
 from multiprocessing import Process, freeze_support
 import numpy as np
+from gensim.topic_coherence import direct_confirmation_measure  #https://github.com/RaRe-Technologies/gensim/issues/3040
+from gensim_fix import custom_log_ratio_measure
+
+
+
+
 
 #http://www.cse.chalmers.se/~richajo/dit862/L13/LDA%20with%20gensim%20(small%20example).html
 #Some code inspired from https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0 & 
@@ -17,7 +23,7 @@ if __name__ == '__main__':
     # SETTINGS FOR MODEL
     RANDOM_SEED = 7245
     chunk_size = 2000
-    passes = 10
+    passes = 5
     num_topics=21
     dic_file = "models/bi_trained_lda_dictionary.sav"
     corp_file = "models/bi_trained_lda_corpus_tfidf.sav"
@@ -35,13 +41,15 @@ if __name__ == '__main__':
     #LDA = gensim.models.ldamodel.LdaModel
     #ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED)
     LDA = gensim.models.LdaMulticore
-    ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED, chunksize=chunk_size, dtype=np.float64) 
+    ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED, chunksize=chunk_size, dtype=np.float64,  alpha="symmetric", eta=1) 
     #Save the LDA Model
     pickle.dump(ldamodel, open(model_file, 'wb'))
 
 #from pprint import pprint
 # Print the Keyword in the 10 topics
 # pprint(ldamodel.print_topics())
-
+    direct_confirmation_measure.log_ratio_measure = custom_log_ratio_measure
     coherence_model_lda = CoherenceModel(model=ldamodel, texts=texts, dictionary=dictionary, coherence='c_v')
     print ("Coherence with 21 topics, alpha=symmetric and beta=1 : {}".format(coherence_model_lda.get_coherence()))
+
+    
