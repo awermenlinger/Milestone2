@@ -42,6 +42,7 @@ def lemma_list(lst):
 def clean_df(df):
     df = df.loc[(~df['mesh_terms'].isnull()) & (~df['abstract'].isnull())].copy()
     df['created_date'] = pd.to_datetime(df['created_date'])
+    df = df.where(df['created_date'].dt.year >= 2015).dropna(how='all')
     df.set_index('created_date', inplace=True)
     df['pubmed_id'] = df['pubmed_id'].astype('int32')
 

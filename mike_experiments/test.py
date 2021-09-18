@@ -1,27 +1,6 @@
-# with open("../pubmed_ids_extracted_abstracts.csv") as file:
-#     lines = file.readlines()
-#
-# print(lines)
+from get_dataframe import get_dfs
 
-# import pandas as pd
-#
-# df = pd.read_csv("../pubmed_ids_extracted_abstracts.csv")
-# print(df)
+df, label_df = get_dfs(0.02, 0.01)
+print(label_df.head())
+print(label_df['created_date'].dt.year.unique())
 
-from Bio import Entrez, Medline
-from configurations.config import *
-
-Entrez.email = mike_email
-Entrez.api_key = mike_api_key
-
-
-
-
-pbmdid = 34281299
-
-handle = Entrez.efetch(db='pubmed', rettype='medline', retmode='text', id=pbmdid)
-article = Medline.parse(handle)
-article = list(article)
-key_words = article[0].get('OT')
-mesh_terms = article[0].get('MH')
-print(article[0].get('MH'))
