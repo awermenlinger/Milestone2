@@ -10,19 +10,20 @@ from sentence_transformers import SentenceTransformer, models
 
 start = datetime.now()
 RANDOM_SEED = 42
-
+print('getting dataframes')
 df, label_df = get_dfs(pct_of_df=0.01, pct_meshterms=0.02)
 
 print(label_df.shape)
 
-
+print('setting up x and y')
 y = np.asarray(label_df.iloc[:, :-3].values)
 X = label_df['abstract']
 
+print('setting up BERT')
 model = SentenceTransformer('sentence-transformers/allenai-specter')
 X_bert = model.encode(X)
 
-
+print('splitting data into train/test')
 # splitting the data to training and testing data set
 X_train, X_test, y_train, y_test = train_test_split(X_bert, y, test_size=0.30, random_state=RANDOM_SEED)
 
@@ -48,12 +49,14 @@ parameters = {'estimator__n_neighbors': range(3, 7),
               }
 
 knn = KNeighborsClassifier()
-
+print('creating classifier')
 multiout_knn = MultiOutputClassifier(knn)
 clf = GridSearchCV(multiout_knn, parameters, scoring='f1_micro', n_jobs=6)
+print('fitting classifier')
 clf.fit(X_train, y_train)
 grid_search_results = clf.cv_results_
 
+print('running predictions')
 predicts = clf.predict(X_test)
 
 runtime = datetime.now()-start
