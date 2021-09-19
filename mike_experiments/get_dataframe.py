@@ -1,4 +1,6 @@
 import pandas as pd
+import nltk
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from sklearn.preprocessing import MultiLabelBinarizer
 
