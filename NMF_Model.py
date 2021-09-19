@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import normalize
 import numpy as np
 
-num_topics=19
+num_topics=21
 
 print("loading pre-processed texts...")
 texts_file = 'models/bi_trained_lda_texts.sav'
@@ -41,12 +41,9 @@ def get_nmf_topics(model, n_top_words):
     
     return pd.DataFrame(word_dict);
 
-print("getting results...")
-results_NMF = get_nmf_topics(model, 15)
-
-print("saving...")
-result_file = 'models/bi_trained_NMF_model_sklearn_df.sav'
-pickle.dump(results_NMF, open(result_file, 'wb'))
+print("Saving results...")
+results_NMF = get_nmf_topics(model, 10)
+results_NMF.to_csv("results/NMF_Topics.csv")
 
 print("transforming original abstracts to get model weights...")
 abstracts_tfidf_nmf = model.transform(abstracts_tfidf)
@@ -54,7 +51,5 @@ abstracts_tfidf_nmf = model.transform(abstracts_tfidf)
 result_arrays = 'models/bi_trained_NMF_model_sklearn_res_array.npy'
 np.save(result_arrays, abstracts_tfidf_nmf)
 
-print(abstracts_tfidf_nmf[0])
 print(type(abstracts_tfidf_nmf))
-print(abstracts_tfidf_nmf.shape)
 
