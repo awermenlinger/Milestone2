@@ -128,8 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#pptx files
+#pptx and xslx files
 *.pptx
+*.xlsx
 
 # file: ~/.gitignore_global
 .idea

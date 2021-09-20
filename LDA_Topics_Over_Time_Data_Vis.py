@@ -33,6 +33,13 @@ transformed_df = transformed_df[transformed_df["created_date"] >= "1975-01-01"]
 transformed_df.set_index(["created_date"], inplace = True)
 transformed_df = transformed_df.resample("Y").sum()
 
+topics = ["infection risk", "thyroid cancer", "safety and efficacy", "leukemia chemotherapy", 
+            "surgical intervention", "detection with lymph nodes", "pain management", "cervical cancer",
+             "bladder cancer", "risk prediction", "adjuvant therapy", "healthy habits", "hematologic toxicity",
+             "surgical complications", "tumor angiogenesis", "intraoperative radiation therapy", 
+             "external radiotherapy", "stem cell transplantation", "glioma", "behavioral intervention",
+             "prostate cancer"]
+
 #print(transformed_df.head(50))
 sns.lineplot(data=transformed_df)
 # x = np.linspace(0,46,46)

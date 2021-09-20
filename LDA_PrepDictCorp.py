@@ -87,3 +87,6 @@ corpus_tfidf = tfidf[corpus]
 #save the tfidf_corpus
 pickle.dump(corpus_tfidf, open(tfidf_corp_file, 'wb'))
 pickle.dump(corpus, open(corp_file, 'wb'))
+
+print(len(doc_processed))
+print(len(corpus))

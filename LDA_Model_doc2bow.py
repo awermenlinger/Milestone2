@@ -21,7 +21,7 @@ if __name__ == '__main__':
     RANDOM_SEED = 7245
     chunk_size = 5000
     passes = 5
-    num_topics=10
+    num_topics=21
     dic_file = "models/trained_lda_dictionary.sav"
     corp_file = "models/trained_lda_corpus.sav"
     model_file = "models/trained_lda.sav"
@@ -38,8 +38,9 @@ if __name__ == '__main__':
     LDA = gensim.models.LdaMulticore
     ldamodel = LDA(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes, random_state=RANDOM_SEED) #chunksize=chunk_size, 
     #Save the LDA Model
-    pickle.dump(ldamodel, open(model_file, 'wb'))
-
+    #pickle.dump(ldamodel, open(model_file, 'wb'))
+    ldamodel.save(model_file)
+ 
 #from pprint import pprint
 # Print the Keyword in the 10 topics
 #pprint(ldamodel.print_topics())

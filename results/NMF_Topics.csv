@@ -1,0 +1,21 @@
+,Topic # 01,Topic # 02,Topic # 03,Topic # 04,Topic # 05,Topic # 06,Topic # 07,Topic # 08,Topic # 09,Topic # 10,Topic # 11,Topic # 12,Topic # 13,Topic # 14,Topic # 15,Topic # 16,Topic # 17,Topic # 18,Topic # 19,Topic # 20,Topic # 21
+0,toxic,surgeri,tumor,cell,breast,prostat,relaps,intervent,csf,pain,mutat,vaccin,pet,paclitaxel,placebo,radiotherapi,lymph,chemotherapi,ifn,level,lesion
+1,grade,postop,recurr,express,breast_cancer,psa,transplant,screen,granulocyt,score,pfs,immun,fdg,carboplatin,random,radiat,node,regimen,alpha,serum,imag
+2,toler,oper,bladder,immun,women,prostat_cancer,risk,particip,stimul,analges,progress,peptid,uptak,cisplatin,blind,local,nod,cisplatin,interferon,concentr,detect
+3,phase,resect,resect,activ,tamoxifen,men,leukemia,control,coloni,relief,egfr,antibodi,scan,lung,doubl,fraction,lymph_node,receiv,therapi,plasma,biopsi
+4,cycl,complic,hcc,lymphocyt,risk,biopsi,aml,care,mobil,scale,bevacizumab,respons,tomographi,nsclc,receiv,therapi,lymph_nod,cycl,beta,increas,case
+5,activ,group,tissu,blood,postmenopaus,prostat_specif,acut,health,factor,effect,progress_free,specif,imag,gemcitabin,oral,radiat_therapi,dissect,combin,gamma,decreas,mri
+6,combin,undergo,brain,gene,posit,antigen,children,women,neutrophil,bone,free,antigen,emiss,small,group,irradi,posit,adjuv,melanoma,insulin,sensit
+7,infus,surgic,carcinoma,lymphoma,adjuv,specif,high,test,count,symptom,overal,melanoma,positron,non_small,control,recurr,axillari,complet,hcc,measur,diagnost
+8,partial,laparoscop,malign,peripher,estrogen,androgen,marrow,qualiti,stimul_factor,intens,gene,infect,valu,cell_lung,doubl_blind,neck,stage,cours,combin,chang,enhanc
+9,respons,preoper,size,peripher_blood,hormon,hormon,bone,self,microgram,visual,associ,hla,mri,non,infect,treat,metastas,rate,subcutan,signific,contrast
+10,administ,gastric,local,carcinoma,receptor,prostatectomi,therapi,life,granulocyt_coloni,qualiti,analysi,anti,stag,lung_cancer,compar,head,negat,plus,treat,acid,malign
+11,progress,hospit,case,induc,mastectomi,antigen_psa,donor,exercis,recoveri,sever,line,type,metabol,stage,differ,carcinoma,metastasi,treat,recombin,blood,diagnosi
+12,diseas,procedur,liver,vitro,metastat_breast,risk,diseas,smoke,platelet,life,factor,virus,posit,auc,effect,stage,stag,adjuv_chemotherapi,chronic,correl,accuraci
+13,neutropenia,differ,solid,antigen,postmenopaus_women,screen,induct,program,neutropenia,qualiti_life,prognost,inject,tumour,ovarian,daili,head_neck,melanoma,doxorubicin,effect,associ,perform
+14,advanc,case,metastas,vivo,axillari,radic,age,improv,microg,qol,express,adjuv,predict,advanc,vitamin,follow,nodal,stage,respons,normal,benign
+15,evalu,time,treat,human,negat,biochem,allogen,random,macrophag,improv,versus,induc,negat,platinum,event,control,detect,therapi,respond,protein,liver
+16,schedul,rate,primari,increas,conserv,rectal,lymphoma,educ,cycl,assess,hazard,cervic,comput,combin,advers,tumour,involv,effect,interleukin,mean,cytolog
+17,metastat,compar,glioma,prolifer,endocrin,serum,graft,effect,administr,mean,plus,immunolog,metastas,plus,versus,plan,inject,fluorouracil,renal,higher,valu
+18,regimen,control,invas,stem,earli,detect,high_risk,qualiti_life,cost,inject,predict,human,volum,docetaxel,plus,toxic,gastric,diseas,inject,hormon,examin
+19,mtd,signific,ablat,specif,therapi,score,stem,physic,blood,manag,diseas,protect,correl,week,supplement,concurr,cervic,induct,carcinoma,valu,techniqu

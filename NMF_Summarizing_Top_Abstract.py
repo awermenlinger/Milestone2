@@ -20,17 +20,20 @@ df_weights = pd.DataFrame(topic_weights)
 
 maxValueIndex = df_weights.idxmax()
 
-i=1
+print(maxValueIndex)
+
+i=0
 for top_abs_topic in tqdm(maxValueIndex):
     abstract = abstracts[top_abs_topic]
     summary_text = summarizer(abstract, max_length=100, min_length=5, do_sample=False)[0]['summary_text']    
     topic = str(i) + ": " + summary_text
     summary_per_topic.append(topic)
+    i+=1
 
 print(summary_per_topic)
-with open('results/bi_trained_NMF_topics.txt', 'w') as f:
+with open('results/NMF_topics.txt', 'w') as f:
     for item in summary_per_topic:
-        f.write("%s\n" % item)
+        f.write("%s\n\n" % item)
 
 
 
