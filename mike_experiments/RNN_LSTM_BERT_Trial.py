@@ -1,15 +1,18 @@
 from datetime import datetime
 import numpy as np
 from write_results import results_to_txt
+import tensorflow as tf
 from get_dataframe import get_dfs
 from sentence_transformers import SentenceTransformer
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
-from keras.models import Sequential
-from keras.models import Model
-from keras.layers import Dense, Flatten, LSTM, Conv1D, MaxPooling1D, Dropout, Activation, Input
-from keras.layers.embeddings import Embedding
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Flatten, LSTM, Conv1D, MaxPooling1D, Dropout, Activation, Input
+from tensorflow.keras.layers import Embedding
 from sklearn.metrics import classification_report, accuracy_score, f1_score
+from tensorflow.python.ops.math_ops import reduce_prod
+
 
 # Reference:
 # https://towardsdatascience.com/text-classifier-with-multiple-outputs-and-multiple-losses-in-keras-4b7a527eb858
@@ -17,7 +20,7 @@ from sklearn.metrics import classification_report, accuracy_score, f1_score
 start = datetime.now()
 RANDOM_SEED = 42
 print('getting dataframes')
-df, label_df = get_dfs(pct_of_df=1, pct_meshterms=0.01)
+df, label_df = get_dfs(pct_of_df=0.001, pct_meshterms=0.01)
 
 print(label_df.shape)
 print('setting up x and y')
@@ -38,7 +41,7 @@ X_bk = pad_sequences(X_bert, MAXLENGTH)
 
 print('splitting data into train/test')
 # splitting the data to training and testing data set
-X_train, X_test, y_train, y_test = train_test_split(X_bert, y, test_size=0.30, random_state=RANDOM_SEED)
+X_train, X_test, y_train, y_test = train_test_split(X_bk, y, test_size=0.30, random_state=RANDOM_SEED)
 
 
 main_input = Input(shape=(MAXLENGTH,), dtype='int32', name='main_input')
