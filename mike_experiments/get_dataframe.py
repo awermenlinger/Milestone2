@@ -72,7 +72,7 @@ def multilabel_binerized(df, pct_meshterms):
     label_df['pubmed_id'] = df['pubmed_id'].values
 
     # Remove rows that sum to 0 since those mesh_terms don't exist in that row.
-    label_df = label_df.where(label_df.iloc[:, :-3].sum(axis=1) > 0).dropna()
+    label_df = label_df.where(label_df.iloc[:, :-3].sum(axis=1) > 0).dropna().reset_index(drop=True)
 
     return label_df
 

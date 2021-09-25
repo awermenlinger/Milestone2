@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sentence_transformers import SentenceTransformer, models
-
+from nltk.stem import WordNetLemmatizer
+import pickle
 
 start = datetime.now()
 RANDOM_SEED = 42
@@ -17,11 +18,22 @@ print(label_df.shape)
 
 print('setting up x and y')
 y = np.asarray(label_df.iloc[:, :-3].values)
-X = label_df['abstract']
+# X = label_df['abstract']
 
-print('setting up BERT')
-model = SentenceTransformer('sentence-transformers/allenai-specter')
-X_bert = model.encode(X)
+
+# def lemmatize(lst):
+#     lemmatizer = WordNetLemmatizer()
+#     return " ".join([lemmatizer.lemmatize(x) for x in lst.split()])
+#
+#
+# X_lemmatized = X.apply(lemmatize)
+
+
+# print('setting up BERT')
+# model = SentenceTransformer('sentence-transformers/allenai-specter')
+# X_bert = model.encode(X_lemmatized)
+
+X_bert = np.load('results/bert_sentence_tf30328_3_1_001.npy')
 
 print('splitting data into train/test')
 # splitting the data to training and testing data set
@@ -40,7 +52,8 @@ knn = KNeighborsClassifier(algorithm='auto',
                            metric='euclidean',
                            n_neighbors=5,
                            p=1,
-                           weights='uniform'
+                           weights='uniform',
+                           n_jobs=6
                            )
 
 multiout_knn = MultiOutputClassifier(knn)
@@ -49,6 +62,8 @@ predicts = clf.predict(X_test)
 
 grid_search_results = None
 
+
+pickle.dump(clf, open('results/knn_bert_model.sav'))
 
 runtime = datetime.now()-start
 results_to_txt(clf, y_test, predicts, label_df, 'BERT', runtime, grid_search_results)
