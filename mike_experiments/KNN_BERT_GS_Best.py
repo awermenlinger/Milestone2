@@ -63,7 +63,7 @@ predicts = clf.predict(X_test)
 grid_search_results = None
 
 
-pickle.dump(clf, open('results/knn_bert_model.sav'))
+pickle.dump(clf, open('results/knn_bert_model.pkl', 'wb'))
 
 runtime = datetime.now()-start
 results_to_txt(clf, y_test, predicts, label_df, 'BERT', runtime, grid_search_results)
