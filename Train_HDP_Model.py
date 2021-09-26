@@ -5,7 +5,7 @@ import logging
 #import nltk
 #nltk.download('wordnet')
 
-#https://radimrehurek.com/gensim/auto_examples/core/run_topics_and_transformations.html#sphx-glr-auto-examples-core-run-topics-and-transformations-py
+# https://radimrehurek.com/gensim/auto_examples/core/run_topics_and_transformations.html#sphx-glr-auto-examples-core-run-topics-and-transformations-py
 
 # SETTINGS FOR MODEL
 RANDOM_SEED = 7245

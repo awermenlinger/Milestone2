@@ -11,8 +11,6 @@ import logging
 #import nltk
 #nltk.download('wordnet')
 
-#http://www.cse.chalmers.se/~richajo/dit862/L13/LDA%20with%20gensim%20(small%20example).html
-
 # for gensim to output some progress information while it's training
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)  
 

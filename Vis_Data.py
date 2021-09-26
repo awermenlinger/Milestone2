@@ -19,7 +19,6 @@ for file in data_files:
 dates_df = input_data.copy()
 dates_df = dates_df[["pubmed_id", "created_date"]] 
 
-dates_df = pd.read_csv("dates.csv")
 
 dates_df['created_date'] =  pd.to_datetime(dates_df['created_date'], format="%m/%d/%Y %H:%M")
 dates_df = dates_df[dates_df["created_date"] >= "1970-01-01"] #EDA: Very little data before 1975
@@ -29,5 +28,5 @@ dates_df.columns = ["articles"]
 dates_df = dates_df.resample("Y").count()
 dates_df.head(10)
 sns.set(rc={'figure.figsize':(10,6)})
-sns.lineplot(x=dates_df.index, y=dates_df.articles)
+sns.lineplot(x=dates_df.index, y=dates_df.articles).set_title("Articles over time")
 plt.show()
